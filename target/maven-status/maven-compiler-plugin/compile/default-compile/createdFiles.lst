@@ -2,10 +2,12 @@ com\gfs\app\model\StaffUser.class
 com\gfs\app\ui\SalesController.class
 com\gfs\app\model\ConsumptionDetailRow.class
 com\gfs\app\config\AppDatabaseConfig.class
+com\gfs\app\ui\ConsumptionDetailController$1.class
 com\gfs\app\ui\MarketListController$1.class
 com\gfs\app\model\MarketListRow.class
 com\gfs\app\ui\HomeController.class
 com\gfs\app\repository\MarketListRepository.class
+com\gfs\app\ui\ConsumptionDetailController$2.class
 com\gfs\app\service\MarketListService.class
 com\gfs\app\ui\ConsumptionDetailController.class
 com\gfs\app\ui\MarketListController$2.class
