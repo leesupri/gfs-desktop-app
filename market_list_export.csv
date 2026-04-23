@@ -1,0 +1,68 @@
+Code,Item Name,Category,Inventory UOM,Purchase UOM,Recipe UOM,Purchase Price,Average Cost,Active,Sales,Stocked,Purchased
+Add-009,Additional Nasi Goreng Arsik,Additional,,,,0.000,11313.200,Active,Yes,No,No
+Add-003,Additional to Salmon,Additional,,,,0.000,5400.000,Inactive,No,No,No
+Add-037,Ayam Bumbu Kuning,Additional,,,,0.000,6444.480,Active,Yes,No,No
+Add-014,Ayam Kampung,Additional,,,,0.000,22306.900,Active,Yes,No,No
+MF-69,Cabe Rawit Potong ,Additional,,,,0.000,1042.570,Active,Yes,No,No
+Add-052,Extra Acar,Additional,,,,0.000,611.034,Active,Yes,No,No
+Add-001,Extra Beef,Additional,Porsi,Porsi,Porsi,0.000,11762.200,Active,Yes,Yes,No
+Add-018,Extra Beef Ham ,Additional,,,,0.000,3599.880,Active,Yes,No,No
+Add-020,Extra Beef Sausage ,Additional,,,,0.000,5268.520,Active,Yes,No,No
+Add-051,Extra Cabe Bakso,Additional,,,,0.000,561.214,Active,Yes,No,No
+Add-005,Extra Cheese,Additional,,,,0.000,16000.000,Active,Yes,No,No
+Add-010,Extra Cheese Crust,Additional,,,,0.000,48000.000,Inactive,No,No,No
+Add-064,Extra Cheese Moza,Additional,,,,0.000,320.000,Active,Yes,No,No
+Add-032,Extra Chicken Ham,Additional,,,,0.000,1364.890,Active,Yes,No,No
+Add-004,Extra Chicken Sausage ,Additional,,,,0.000,2795.020,Active,Yes,No,No
+Add-029,Extra Cikala Syrup,Additional,,,,0.000,1284.730,Active,Yes,No,No
+Add-044,Extra Cincang Labar,Additional,,,,0.000,1608.820,Active,Yes,No,No
+Add-055,Extra Demi Glace,Additional,,,,0.000,623.082,Active,Yes,No,No
+Add-061,Extra Dressing Cikala,Additional,,,,0.000,1063.730,Active,Yes,No,No
+Add-062,Extra Dressing Mayo Cheese,Additional,,,,0.000,5374.300,Active,Yes,No,No
+Add-035,Extra Garlic Bread,Additional,,,,0.000,5916.150,Active,Yes,No,No
+Add-033,Extra Grilled Chicken Breast,Additional,,,,0.000,8794.580,Active,Yes,No,No
+Add-023,Extra Gula Merah,Additional,,,,0.000,2627.640,Active,Yes,No,No
+Add-059,Extra Honey Mustard,Additional,,,,0.000,2675.870,Active,Yes,No,No
+Add-021,Extra Ice Cube,Additional,,,,0.000,204.000,Active,Yes,No,No
+Add-049,Extra Kacang,Additional,,,,0.000,979.076,Active,Yes,No,No
+Add-048,Extra Kacang Teri,Additional,,,,0.000,1623.300,Active,Yes,No,No
+Add-041,Extra Kerupuk Emping,Additional,,,,0.000,1696.890,Active,Yes,No,No
+Add-042,Extra Kerupuk Udang,Additional,,,,0.000,2345.580,Active,Yes,No,No
+Add-053,Extra Kuah Cipera,Additional,,,,0.000,1653.000,Active,Yes,No,No
+Add-043,Extra Kuah Kental,Additional,,,,0.000,8014.560,Active,Yes,No,No
+Add-026,Extra Madu,Additional,,,,0.000,3463.220,Active,Yes,No,No
+Add-027,Extra Markisa Syrup,Additional,,,,0.000,2457.690,Active,Yes,No,No
+Add-060,Extra Mayo Coselaw,Additional,,,,0.000,2021.690,Active,Yes,No,No
+Add-058,Extra Mayonaise,Additional,,,,0.000,2071.020,Active,Yes,No,No
+Add-008,Extra Mushroom,Additional,,,,0.000,2185.070,Active,Yes,No,No
+Add-007,Extra Nasi Goreng Oriental,Additional,Porsi,Porsi,Porsi,0.000,7294.810,Active,Yes,Yes,No
+Add-015,Extra Pepperoni,Additional,,,,0.000,6631.920,Active,Yes,No,No
+Add-030,Extra Pineapple Syrup,Additional,,,,0.000,566.517,Active,Yes,No,No
+Add-024,Extra Rempah,Additional,,,,0.000,335.944,Active,Yes,No,No
+Add-028,Extra Rosemary Syrup,Additional,,,,0.000,535.524,Active,Yes,No,No
+Add-002,Extra Salmon Dice,Additional,,,,0.000,17893.600,Active,Yes,No,No
+Add-011,Extra Salmon Steak,Additional,,,,0.000,40088.199,Active,Yes,No,No
+Add-045,Extra Sambal Andaliman,Additional,,,,0.000,1081.450,Active,Yes,No,No
+Add-046,Extra Sambal Kecombrang,Additional,,,,0.000,717.452,Active,Yes,No,No
+Add-047,Extra Sambal Terasi,Additional,,,,0.000,920.030,Active,Yes,No,No
+Add-019,Extra Sauce,Additional,,,,0.000,0.000,Active,Yes,No,No
+Add-022,Extra Simple Syrup,Additional,,,,0.000,545.238,Active,Yes,No,No
+Add-025,Extra SKM,Additional,,,,0.000,1378.380,Active,Yes,No,No
+Add-006,Extra Smoked Chicken,Additional,,,,0.000,7534.430,Active,Yes,No,No
+Add-031,Extra Sugar Stick,Additional,,,,0.000,560.000,Active,Yes,No,No
+Add-063,Extra Tamarillo Jam,Additional,,,,0.000,844.644,Active,Yes,No,No
+Add-054,Extra Tar - Tar Sauce,Additional,,,,0.000,1999.160,Active,Yes,No,No
+Add-050,Extra Teri Goreng,Additional,,,,0.000,1700.640,Active,Yes,No,No
+Add-056,Extra Tomato Basil Sauce,Additional,,,,0.000,2212.030,Active,Yes,No,No
+Add-034,Extra Vegetable Soup,Additional,,,,0.000,3917.230,Active,Yes,No,No
+Add-012,Iga Kecil,Additional,,,,0.000,12195.300,Inactive,No,No,No
+Add-036,Nasi Putih,Additional,porsi,porsi,porsi,0.000,2549.620,Active,Yes,Yes,No
+Add-039,Omelete,Additional,,,,0.000,4795.870,Active,Yes,No,No
+TKW-001,Take Away Cold Drink,Additional,,,,0.000,1105.000,Active,Yes,No,No
+TKW-004,Take Away Food,Additional,,,,0.000,2099.970,Active,Yes,No,No
+TKW-002,Take Away Hot Drink,Additional,,,,0.000,1180.000,Active,Yes,No,No
+TKW-005,Take Away Pizza,Additional,,,,0.000,5249.580,Active,Yes,No,No
+TKW-003,Take Away Soup ,Additional,,,,0.000,2000.000,Active,Yes,No,No
+Add-013,Telur Ayam Rebus,Additional,,,,0.000,2166.390,Active,Yes,No,No
+Add-038,Telur Dadar,Additional,,,,0.000,2208.890,Active,Yes,No,No
+Add-040,Telur Mata Sapi,Additional,,,,0.000,2194.720,Active,Yes,No,No
