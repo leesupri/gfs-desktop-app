@@ -8,9 +8,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
@@ -23,64 +25,45 @@
     </padding>
 
     <children>
+        <!-- Title -->
         <VBox spacing="4">
             <Label text="Market List" styleClass="content-title"/>
             <Label text="Track items by status, sales, stocked, and purchased flags." styleClass="content-subtitle"/>
         </VBox>
 
+        <!-- Filter card -->
         <VBox spacing="12" styleClass="filter-card">
             <padding>
                 <Insets top="14" right="14" bottom="14" left="14"/>
             </padding>
-
             <children>
                 <Label text="Filters" styleClass="section-title"/>
 
                 <HBox spacing="12">
                     <children>
-                        <VBox spacing="6">
-                            <children>
-                                <Label text="Search" styleClass="form-label"/>
-                                <TextField fx:id="searchField"
-                                           promptText="Search by item, code, or category..."
-                                           prefWidth="280"/>
-                            </children>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Search" styleClass="form-label"/>
+                            <TextField fx:id="searchField" promptText="Search by item, code, or category..." />
                         </VBox>
-
                         <VBox spacing="6">
                             <Label text="Category" styleClass="form-label"/>
                             <ComboBox fx:id="categoryFilterBox" prefWidth="160"/>
                         </VBox>
-
-
-
-
                         <VBox spacing="6">
-                            <children>
-                                <Label text="Active" styleClass="form-label"/>
-                                <ComboBox fx:id="activeFilterBox" prefWidth="120"/>
-                            </children>
+                            <Label text="Active" styleClass="form-label"/>
+                            <ComboBox fx:id="activeFilterBox" prefWidth="120"/>
                         </VBox>
-
                         <VBox spacing="6">
-                            <children>
-                                <Label text="Sales" styleClass="form-label"/>
-                                <ComboBox fx:id="salesFilterBox" prefWidth="100"/>
-                            </children>
+                            <Label text="Sales" styleClass="form-label"/>
+                            <ComboBox fx:id="salesFilterBox" prefWidth="100"/>
                         </VBox>
-
                         <VBox spacing="6">
-                            <children>
-                                <Label text="Stocked" styleClass="form-label"/>
-                                <ComboBox fx:id="stockedFilterBox" prefWidth="100"/>
-                            </children>
+                            <Label text="Stocked" styleClass="form-label"/>
+                            <ComboBox fx:id="stockedFilterBox" prefWidth="100"/>
                         </VBox>
-
                         <VBox spacing="6">
-                            <children>
-                                <Label text="Purchased" styleClass="form-label"/>
-                                <ComboBox fx:id="purchasedFilterBox" prefWidth="110"/>
-                            </children>
+                            <Label text="Purchased" styleClass="form-label"/>
+                            <ComboBox fx:id="purchasedFilterBox" prefWidth="110"/>
                         </VBox>
                     </children>
                 </HBox>
@@ -99,21 +82,31 @@
             </children>
         </VBox>
 
-        <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="report-table">
-            <columns>
-                <TableColumn fx:id="codeColumn" text="Code" prefWidth="110"/>
-                <TableColumn fx:id="nameColumn" text="Item Name" prefWidth="220"/>
-                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="170"/>
-                <TableColumn fx:id="inventoryUomColumn" text="Inventory UOM" prefWidth="110"/>
-                <TableColumn fx:id="purchaseUomColumn" text="Purchase UOM" prefWidth="110"/>
-                <TableColumn fx:id="recipeUomColumn" text="Recipe UOM" prefWidth="110"/>
-                <TableColumn fx:id="purchasePriceColumn" text="Purchase Price" prefWidth="110"/>
-                <TableColumn fx:id="averageCostColumn" text="Average Cost" prefWidth="110"/>
-                <TableColumn fx:id="activeColumn" text="Active" prefWidth="80"/>
-                <TableColumn fx:id="salesColumn" text="Sales" prefWidth="80"/>
-                <TableColumn fx:id="stockedColumn" text="Stocked" prefWidth="80"/>
-                <TableColumn fx:id="purchasedColumn" text="Purchased" prefWidth="90"/>
-            </columns>
-        </TableView>
+        <!-- Table with loading overlay -->
+        <StackPane VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="tableView" styleClass="report-table">
+                    <columns>
+                        <TableColumn fx:id="codeColumn" text="Code" prefWidth="110"/>
+                        <TableColumn fx:id="nameColumn" text="Item Name" prefWidth="220"/>
+                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="170"/>
+                        <TableColumn fx:id="inventoryUomColumn" text="Inventory UOM" prefWidth="110"/>
+                        <TableColumn fx:id="purchaseUomColumn" text="Purchase UOM" prefWidth="110"/>
+                        <TableColumn fx:id="recipeUomColumn" text="Recipe UOM" prefWidth="110"/>
+                        <TableColumn fx:id="purchasePriceColumn" text="Purchase Price" prefWidth="110"/>
+                        <TableColumn fx:id="averageCostColumn" text="Average Cost" prefWidth="110"/>
+                        <TableColumn fx:id="activeColumn" text="Active" prefWidth="80"/>
+                        <TableColumn fx:id="salesColumn" text="Sales" prefWidth="80"/>
+                        <TableColumn fx:id="stockedColumn" text="Stocked" prefWidth="80"/>
+                        <TableColumn fx:id="purchasedColumn" text="Purchased" prefWidth="90"/>
+                    </columns>
+                </TableView>
+
+                <!-- Loading overlay (initially hidden) -->
+                <StackPane fx:id="loadingOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
+                    <ProgressIndicator fx:id="progressIndicator" />
+                </StackPane>
+            </children>
+        </StackPane>
     </children>
 </VBox>

@@ -9,6 +9,7 @@ com\gfs\app\ui\HomeController.class
 com\gfs\app\repository\MarketListRepository.class
 com\gfs\app\ui\ConsumptionDetailController$2.class
 com\gfs\app\service\MarketListService.class
+com\gfs\app\ui\MarketListController$4.class
 com\gfs\app\ui\ConsumptionDetailController.class
 com\gfs\app\ui\MarketListController$2.class
 com\gfs\app\service\AuthService.class
@@ -28,3 +29,4 @@ com\gfs\app\config\ReportsDatabaseConfig.class
 com\gfs\app\SessionManager.class
 com\gfs\app\ui\MainLayoutController.class
 com\gfs\app\repository\ConsumptionDetailRepository.class
+com\gfs\app\ui\MarketListController$3.class
