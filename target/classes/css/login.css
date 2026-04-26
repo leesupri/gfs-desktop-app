@@ -1,0 +1,27 @@
+/* login.css - Styles for the login screen */
+.login-root {
+    -fx-background-color: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+}
+
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #dcdfe4;
+    -fx-border-radius: 12;
+}
+
+.login-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.login-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+}
+
+.login-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #dc2626;
+}

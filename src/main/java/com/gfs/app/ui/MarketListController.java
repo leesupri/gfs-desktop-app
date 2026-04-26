@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class MarketListController {
@@ -263,8 +264,8 @@ public class MarketListController {
                             csvSafe(r.getInventoryUom()),
                             csvSafe(r.getPurchaseUom()),
                             csvSafe(r.getRecipeUom()),
-                            formatNumber(r.getPurchasePrice()),
-                            formatNumber(r.getAverageCost()),
+                            csvSafe(formatNumberCSV(r.getPurchasePrice())),
+                            csvSafe(formatNumberCSV(r.getAverageCost())),
                             csvSafe(r.isActive() ? "Active" : "Inactive"),
                             csvSafe(r.isSales() ? "Yes" : "No"),
                             csvSafe(r.isStocked() ? "Yes" : "No"),
@@ -281,8 +282,8 @@ public class MarketListController {
         }
     }
 
-    private String formatNumber(double value) {
-        return decimalFormat.format(value);
+    private String formatNumberCSV(double value) {
+        return String.format(Locale.US, "%.3f", value);
     }
 
     private String csvSafe(String value) {

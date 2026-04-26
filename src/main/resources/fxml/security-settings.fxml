@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.SecuritySettingsController" spacing="14" styleClass="content-pane">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <children>
+        <Label text="Role &amp; Permission Management" styleClass="content-title"/>
+        <Label text="Define roles and assign permissions." styleClass="content-subtitle"/>
+
+        <HBox spacing="10">
+            <Button text="New Role" onAction="#handleNewRole" styleClass="primary-button"/>
+            <Button text="Edit Role" onAction="#handleEditRole" styleClass="secondary-button"/>
+            <Button text="Delete Role" onAction="#handleDeleteRole" styleClass="secondary-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <TableView fx:id="rolesTable" prefHeight="200">
+            <columns>
+                <TableColumn fx:id="colRoleName" text="Role Name" prefWidth="200"/>
+            </columns>
+        </TableView>
+
+        <Label text="Permissions for selected role:" styleClass="section-title"/>
+        <ListView fx:id="permissionsListView" VBox.vgrow="ALWAYS"/>
+        <HBox spacing="10">
+            <Button text="Save Permissions" onAction="#handleSavePermissions" styleClass="primary-button"/>
+        </HBox>
+    </children>
+</VBox>

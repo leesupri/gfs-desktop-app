@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.RecipeReportController"
+      spacing="14" styleClass="content-pane">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <children>
+        <VBox spacing="4">
+            <Label text="Recipe Report" styleClass="content-title"/>
+            <Label text="Search by recipe or ingredient name; filter by flags." styleClass="content-subtitle"/>
+        </VBox>
+
+        <VBox spacing="12" styleClass="filter-card">
+            <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+            <children>
+                <Label text="Filters" styleClass="section-title"/>
+
+                <HBox spacing="12">
+                    <!-- Search field -->
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Search" styleClass="form-label"/>
+                        <TextField fx:id="searchField" promptText="Recipe name or ingredient name"/>
+                    </VBox>
+
+                    <!-- Sales filter -->
+                    <VBox spacing="6">
+                        <Label text="Sales" styleClass="form-label"/>
+                        <ComboBox fx:id="salesFilter" prefWidth="80"/>
+                    </VBox>
+
+                    <!-- Purchased filter -->
+                    <VBox spacing="6">
+                        <Label text="Purchased" styleClass="form-label"/>
+                        <ComboBox fx:id="purchasedFilter" prefWidth="80"/>
+                    </VBox>
+
+                    <!-- Stocked filter -->
+                    <VBox spacing="6">
+                        <Label text="Stocked" styleClass="form-label"/>
+                        <ComboBox fx:id="stockedFilter" prefWidth="80"/>
+                    </VBox>
+
+                    <!-- Active filter -->
+                    <VBox spacing="6">
+                        <Label text="Active" styleClass="form-label"/>
+                        <ComboBox fx:id="activeFilter" prefWidth="80"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10">
+                    <Button text="Search" onAction="#handleSearch" styleClass="primary-button"/>
+                    <Button text="Reset" onAction="#handleReset" styleClass="secondary-button"/>
+                    <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="resultLabel" text="0 recipe(s)" styleClass="result-label"/>
+                </HBox>
+            </children>
+        </VBox>
+
+        <StackPane VBox.vgrow="ALWAYS">
+            <TreeTableView fx:id="treeTableView" showRoot="false" styleClass="report-table">
+                <columns>
+                    <TreeTableColumn fx:id="recipeNameColumn" text="Recipe Name" prefWidth="180"/>
+                    <TreeTableColumn fx:id="activeColumn" text="Active" prefWidth="70"/>
+                    <TreeTableColumn fx:id="salesColumn" text="Sales" prefWidth="60"/>
+                    <TreeTableColumn fx:id="purchasedColumn" text="Purchased" prefWidth="70"/>
+                    <TreeTableColumn fx:id="stockedColumn" text="Stocked" prefWidth="70"/>
+                    <TreeTableColumn fx:id="productionColumn" text="Production Qty" prefWidth="100"/>
+                    <TreeTableColumn fx:id="uomColumn" text="UOM" prefWidth="60"/>
+                    <TreeTableColumn fx:id="itemNameColumn" text="Ingredient" prefWidth="200"/>
+                    <TreeTableColumn fx:id="recQtyColumn" text="Recipe Qty" prefWidth="80"/>
+                    <TreeTableColumn fx:id="recipeUomColumn" text="Recipe UOM" prefWidth="80"/>
+                    <TreeTableColumn fx:id="invQtyColumn" text="Inventory Qty" prefWidth="90"/>
+                    <TreeTableColumn fx:id="invUomColumn" text="Inv UOM" prefWidth="70"/>
+                    <TreeTableColumn fx:id="unitCostColumn" text="Unit Cost" prefWidth="90"/>
+                    <TreeTableColumn fx:id="totalCostColumn" text="Ingredient Cost" prefWidth="110"/>
+                    <TreeTableColumn fx:id="costPerProductionColumn" text="Cost per Production Unit" prefWidth="160"/>
+                </columns>
+            </TreeTableView>
+            <StackPane fx:id="loadingOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
+                <ProgressIndicator fx:id="progressIndicator"/>
+            </StackPane>
+        </StackPane>
+    </children>
+</VBox>

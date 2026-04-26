@@ -8,6 +8,8 @@ public class StaffUser {
     private final String password;
     private final boolean active;
 
+    
+
     public StaffUser(long id, String username, String name, String title, String password, boolean active) {
         this.id = id;
         this.username = username;

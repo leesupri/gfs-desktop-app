@@ -1,0 +1,22 @@
+/* core.css - Global styles and root definitions */
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f3f4f6;
+}
+
+/* Utility classes (can be moved to utils.css if you prefer) */
+.text-right {
+    -fx-text-alignment: right;
+}
+
+.text-center {
+    -fx-text-alignment: center;
+}
+
+.mt-10 {
+    -fx-padding: 10 0 0 0;
+}
+
+.mt-20 {
+    -fx-padding: 20 0 0 0;
+}

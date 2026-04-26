@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
@@ -15,30 +16,45 @@
             fx:id="rootPane"
             stylesheets="@../css/app.css">
 
+    <!-- Left Sidebar -->
     <left>
-        <VBox styleClass="sidebar">
+        <VBox styleClass="sidebar" spacing="8">
             <padding>
-                <Insets top="14" right="12" bottom="14" left="12"/>
+                <Insets top="20" right="12" bottom="20" left="12"/>
             </padding>
 
             <children>
-                <Label text="GFS Desktop App" styleClass="app-title"/>
-                <Label text="Navigation" styleClass="sidebar-heading"/>
+                <!-- App logo / title -->
+                <Label text="GFS" styleClass="sidebar-logo"/>
+                <Label text="Desktop App" styleClass="sidebar-subtitle"/>
+                <Separator styleClass="sidebar-separator"/>
+
+                <Label text="MAIN" styleClass="sidebar-heading"/>
 
                 <Button fx:id="homeButton" text="Home" onAction="#showHome" styleClass="nav-button"/>
                 <Button fx:id="salesButton" text="Sales" onAction="#showSales" styleClass="nav-button"/>
                 <Button fx:id="marketListButton" text="Market List" onAction="#showMarketList" styleClass="nav-button"/>
+                <Button fx:id="recipeButton" text="Recipe Report" onAction="#showRecipeReport" styleClass="nav-button"/>
                 <Button fx:id="consumptionDetailButton" text="Consumption Detail" onAction="#showConsumptionDetail" styleClass="nav-button"/>
+                <Button fx:id="warehouseConsumptionButton" text="Warehouse Consumption" onAction="#showWarehouseConsumption" styleClass="nav-button"/>
                 <Button fx:id="activityLogButton" text="Activity Log" onAction="#showActivityLog" styleClass="nav-button"/>
+
+                <Separator styleClass="sidebar-separator"/>
+
+                <Label text="ADMIN" styleClass="sidebar-heading"/>
+
                 <Button fx:id="staffButton" text="Staff Settings" onAction="#showStaffSettings" styleClass="nav-button"/>
-                <Button fx:id="securityButton" text="Security Settings" onAction="#showSecuritySettings" styleClass="nav-button"/>
+<Button fx:id="securityButton" text="Security Settings" onAction="#showSecuritySettings" styleClass="nav-button"/>
 
                 <Region VBox.vgrow="ALWAYS"/>
-                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-secondary"/>
+
+                <Separator styleClass="sidebar-separator"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-logout"/>
             </children>
         </VBox>
     </left>
 
+    <!-- Top Bar -->
     <top>
         <HBox styleClass="topbar">
             <padding>
@@ -46,9 +62,7 @@
             </padding>
             <children>
                 <Label fx:id="pageTitleLabel" text="Home" styleClass="page-title"/>
-
                 <Region HBox.hgrow="ALWAYS"/>
-
                 <Label fx:id="currentUserLabel" text="User: -" styleClass="topbar-user"/>
             </children>
         </HBox>

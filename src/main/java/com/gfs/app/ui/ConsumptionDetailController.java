@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -331,48 +332,52 @@ private void handleToday() {
     }
 
     private void exportToCsv(List<ConsumptionDetailRow> rows) {
-        if (rows.isEmpty()) {
-            showAlert("No Data", "Nothing to export. Please adjust filters.");
-            return;
-        }
+    if (rows.isEmpty()) {
+        showAlert("No Data", "Nothing to export. Please adjust filters.");
+        return;
+    }
 
-        try {
-            String downloadsPath = System.getProperty("user.home") + File.separator + "Downloads";
-            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-            Path filePath = Paths.get(downloadsPath, "consumption_detail_" + timestamp + ".csv");
+    try {
+        String downloadsPath = System.getProperty("user.home") + File.separator + "Downloads";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        Path filePath = Paths.get(downloadsPath, "consumption_detail_" + timestamp + ".csv");
 
-            try (PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8")) {
-                writer.write('\uFEFF'); // UTF-8 BOM for Excel
-                writer.println("Invoice,Date,Category,Result Description,Result Quantity,Item,Quantity,UOM,Unit Cost,Total Cost,Warehouse");
+        try (PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8")) {
+            writer.write('\uFEFF'); // UTF-8 BOM for Excel
 
-                for (ConsumptionDetailRow row : rows) {
-                    writer.println(String.join(",",
-                            csvSafe(String.valueOf(row.getInvoiceId())),
-                            csvSafe(row.getDate()),
-                            csvSafe(row.getCategory()),
-                            csvSafe(row.getResultDescription()),
-                            formatNumber(row.getResultQuantity()),
-                            csvSafe(row.getItem()),
-                            formatNumber(row.getQuantity()),
-                            csvSafe(row.getUom()),
-                            formatNumber(row.getUnitCost()),
-                            formatNumber(row.getTotalCost()),
-                            csvSafe(row.getWarehouse())
-                    ));
-                }
+            // Header
+            writer.println("Invoice,Date,Category,Result Description,Result Quantity,Item,Quantity,UOM,Unit Cost,Total Cost,Warehouse");
+
+            // Data rows – use String.format for numeric values
+            for (ConsumptionDetailRow row : rows) {
+                writer.println(String.join(",",
+                        csvSafe(String.valueOf(row.getInvoiceId())),
+                        csvSafe(row.getDate()),
+                        csvSafe(row.getCategory()),
+                        csvSafe(row.getResultDescription()),
+                        formatNumberCSV(row.getResultQuantity()),
+                        csvSafe(row.getItem()),
+                        formatNumberCSV(row.getQuantity()),
+                        csvSafe(row.getUom()),
+                        formatNumberCSV(row.getUnitCost()),
+                        formatNumberCSV(row.getTotalCost()),
+                        csvSafe(row.getWarehouse())
+                ));
             }
-
-            showExportSuccessDialog(filePath.toFile());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert("Export Error", "Could not save CSV file.\n" + e.getMessage());
         }
-    }
 
-    private String formatNumber(double value) {
-        return decimalFormat.format(value);
+        showExportSuccessDialog(filePath.toFile());
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        showAlert("Export Error", "Could not save CSV file.\n" + e.getMessage());
     }
+}
+
+// Dedicated CSV number formatter (no thousand separators)
+private String formatNumberCSV(double value) {
+    return String.format(Locale.US, "%.3f", value);
+}
 
     private String csvSafe(String value) {
         if (value == null) return "";

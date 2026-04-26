@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.StaffSettingsController" spacing="14" styleClass="content-pane">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <children>
+        <Label text="Staff Management" styleClass="content-title"/>
+        <Label text="Create, edit, and delete staff accounts. Assign roles." styleClass="content-subtitle"/>
+
+        <HBox spacing="10">
+            <Button text="New Staff" onAction="#handleNewStaff" styleClass="primary-button"/>
+            <Button text="Edit Selected" onAction="#handleEditStaff" styleClass="secondary-button"/>
+            <Button text="Delete Selected" onAction="#handleDeleteStaff" styleClass="secondary-button"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <TableView fx:id="staffTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colUsername" text="Username" prefWidth="120"/>
+                <TableColumn fx:id="colName" text="Full Name" prefWidth="180"/>
+                <TableColumn fx:id="colTitle" text="Title" prefWidth="150"/>
+                <TableColumn fx:id="colActive" text="Active" prefWidth="80"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <Label text="Roles for selected user:" styleClass="form-label"/>
+            <ListView fx:id="rolesListView" prefHeight="100" VBox.vgrow="NEVER"/>
+        </HBox>
+    </children>
+</VBox>

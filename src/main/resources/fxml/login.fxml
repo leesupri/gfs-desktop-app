@@ -2,46 +2,54 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
 <StackPane xmlns="http://javafx.com/javafx/21"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.gfs.app.ui.LoginController"
-           styleClass="login-root">
+           styleClass="login-root"
+           stylesheets="@../css/app.css">
 
-    <children>
-        <VBox spacing="14" maxWidth="320" styleClass="login-card">
-            <padding>
-                <Insets top="24" right="24" bottom="24" left="24"/>
-            </padding>
+    <VBox spacing="16" maxWidth="380" styleClass="login-card">
+        <padding>
+            <Insets top="28" right="28" bottom="28" left="28"/>
+        </padding>
 
-            <children>
+        <children>
+            <!-- App title -->
+            <VBox spacing="4">
                 <Label text="GFS Desktop App" styleClass="login-title"/>
-                <Label text="Sign in to continue" styleClass="login-subtitle"/>
-                
+                <Label text="Sign in to access reports" styleClass="login-subtitle"/>
+            </VBox>
 
-                <VBox spacing="6">
-                    <Label text="Username" styleClass="form-label"/>
-                    <TextField fx:id="usernameField" promptText="Enter username"/>
-                </VBox>
+            <!-- Username field -->
+            <VBox spacing="6">
+                <Label text="Username" styleClass="form-label"/>
+                <TextField fx:id="usernameField" promptText="Enter your username" styleClass="login-field"/>
+            </VBox>
 
-                <VBox spacing="6">
-                    <Label text="Password" styleClass="form-label"/>
-                    <PasswordField fx:id="passwordField" promptText="Enter password"/>
-                </VBox>
+            <!-- Password field with show/hide toggle -->
+            <VBox spacing="6">
+                <Label text="Password" styleClass="form-label"/>
+                <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="login-field"/>
+                <CheckBox fx:id="showPasswordCheckbox" text="Show password" styleClass="checkbox-small"/>
+            </VBox>
 
-                <Label fx:id="messageLabel" styleClass="login-message"/>
+            <!-- Error message -->
+            <Label fx:id="messageLabel" styleClass="login-message" wrapText="true"/>
 
-                <HBox spacing="10">
-                    <Button text="Login" onAction="#handleLogin" styleClass="primary-button"/>
-                    <Button text="Test DB Connection" onAction="#handleTestConnection" styleClass="secondary-button"/>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
+            <!-- Buttons -->
+            <HBox spacing="12" alignment="CENTER">
+                <Button text="Login" onAction="#handleLogin" styleClass="primary-button" prefWidth="100"/>
+                <Button text="Test DB" onAction="#handleTestConnection" styleClass="secondary-button" prefWidth="100"/>
+            </HBox>
+        </children>
+    </VBox>
 </StackPane>

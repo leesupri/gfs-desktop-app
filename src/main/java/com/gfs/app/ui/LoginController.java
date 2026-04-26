@@ -7,9 +7,11 @@ import com.gfs.app.db.ReportsDatabaseManager;
 import com.gfs.app.service.AuthResult;
 import com.gfs.app.service.AuthService;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 
@@ -22,14 +24,44 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
+    private CheckBox showPasswordCheckbox;
+
+    @FXML
     private Label messageLabel;
 
     private final AuthService authService = new AuthService();
 
+    
     @FXML
-    public void initialize() {
-        messageLabel.setText("");
-    }
+public void initialize() {
+    messageLabel.setText("");
+    // Password visibility toggle
+    showPasswordCheckbox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+        if (isSelected) {
+            // Show password as plain text
+            TextField visiblePassword = new TextField(passwordField.getText());
+            visiblePassword.setStyle(passwordField.getStyle());
+            visiblePassword.getStyleClass().addAll(passwordField.getStyleClass());
+            visiblePassword.setId("visiblePassword");
+            // Replace passwordField with visible field
+            VBox parent = (VBox) passwordField.getParent();
+            int idx = parent.getChildren().indexOf(passwordField);
+            parent.getChildren().set(idx, visiblePassword);
+            visiblePassword.textProperty().bindBidirectional(passwordField.textProperty());
+        } else {
+            // Switch back to password field
+            TextField visible = (TextField) ((VBox) passwordField.getParent()).getChildren().get(
+                    ((VBox) passwordField.getParent()).getChildren().indexOf(passwordField) + 1
+            );
+            if (visible != null && "visiblePassword".equals(visible.getId())) {
+                VBox parent = (VBox) passwordField.getParent();
+                int idx = parent.getChildren().indexOf(visible);
+                parent.getChildren().set(idx, passwordField);
+                passwordField.textProperty().bindBidirectional(visible.textProperty());
+            }
+        }
+    });
+}
 
     @FXML
     private void handleLogin() {
