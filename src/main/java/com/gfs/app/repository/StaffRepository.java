@@ -64,7 +64,7 @@ public class StaffRepository {
             stmt.setString(3, user.getTitle());
             String hash = (plainPassword != null && !plainPassword.isEmpty()) 
                             ? PasswordUtil.hashPassword(plainPassword) 
-                            : user.getPassword(); // should already be hashed
+                            : user.getPasswordHash(); // should already be hashed
             stmt.setString(4, hash);
             stmt.setBoolean(5, user.isActive());
             stmt.executeUpdate();

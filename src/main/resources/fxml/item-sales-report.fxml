@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.ItemSalesReportController"
+      spacing="14" styleClass="content-pane">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <children>
+        <VBox spacing="4">
+            <Label text="Item Sales Report" styleClass="content-title"/>
+            <Label text="Grouped by Department → Category → Item. Filter by date, item, department, category." styleClass="content-subtitle"/>
+        </VBox>
+
+        <VBox spacing="12" styleClass="filter-card">
+            <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+            <children>
+                <Label text="Filters" styleClass="section-title"/>
+                <HBox spacing="12">
+                    <VBox spacing="6">
+                        <Label text="Start Date" styleClass="form-label"/>
+                        <DatePicker fx:id="startDatePicker" prefWidth="140"/>
+                    </VBox>
+                    <VBox spacing="6">
+                        <Label text="End Date" styleClass="form-label"/>
+                        <DatePicker fx:id="endDatePicker" prefWidth="140"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Item Search" styleClass="form-label"/>
+                        <TextField fx:id="itemSearchField" promptText="Item name or code"/>
+                    </VBox>
+                </HBox>
+                <HBox spacing="12">
+                    <VBox spacing="6">
+                        <Label text="Department" styleClass="form-label"/>
+                        <ComboBox fx:id="departmentFilter" prefWidth="160"/>
+                    </VBox>
+                    <VBox spacing="6">
+                        <Label text="Category" styleClass="form-label"/>
+                        <ComboBox fx:id="categoryFilter" prefWidth="160"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <HBox spacing="10">
+                    <Button text="Search" onAction="#handleSearch" styleClass="primary-button"/>
+                    <Button text="Reset" onAction="#handleReset" styleClass="secondary-button"/>
+                    <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="resultLabel" text="0 item(s)" styleClass="result-label"/>
+                </HBox>
+            </children>
+        </VBox>
+
+        <StackPane VBox.vgrow="ALWAYS">
+            <TreeTableView fx:id="treeTableView" showRoot="false" styleClass="report-table">
+                <columns>
+                    <TreeTableColumn fx:id="departmentColumn" text="Department" prefWidth="150"/>
+                    <TreeTableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
+                    <TreeTableColumn fx:id="itemNameColumn" text="Item Name" prefWidth="200"/>
+                    <TreeTableColumn fx:id="itemCodeColumn" text="Code" prefWidth="80"/>
+                    <TreeTableColumn fx:id="quantityColumn" text="Quantity" prefWidth="80"/>
+                    <TreeTableColumn fx:id="subtotalColumn" text="Revenue" prefWidth="100"/>
+                    <TreeTableColumn fx:id="costColumn" text="Cost" prefWidth="100"/>
+                    <TreeTableColumn fx:id="discountColumn" text="Discount" prefWidth="90"/>
+                    <TreeTableColumn fx:id="serviceChargeColumn" text="Service" prefWidth="90"/>
+                    <TreeTableColumn fx:id="taxColumn" text="Tax" prefWidth="90"/>
+                    <TreeTableColumn fx:id="profitColumn" text="Profit" prefWidth="100"/>
+                    <TreeTableColumn fx:id="totalColumn" text="Total" prefWidth="100"/>
+                    <TreeTableColumn fx:id="costPercentageColumn" text="Cost %" prefWidth="80"/>
+                </columns>
+            </TreeTableView>
+            <StackPane fx:id="loadingOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
+                <ProgressIndicator fx:id="progressIndicator"/>
+            </StackPane>
+        </StackPane>
+    </children>
+</VBox>

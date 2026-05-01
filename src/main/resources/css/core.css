@@ -1,7 +1,7 @@
 /* core.css - Global styles and root definitions */
 .root {
     -fx-font-family: "Segoe UI", Arial, sans-serif;
-    -fx-background-color: #f3f4f6;
+    -fx-background-color: #fffef3;
 }
 
 /* Utility classes (can be moved to utils.css if you prefer) */

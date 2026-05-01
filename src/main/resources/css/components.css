@@ -1,32 +1,42 @@
 /* components.css - Reusable UI components */
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .primary-button {
-    -fx-background-color: #111827;
-    -fx-text-fill: white;
+    -fx-background-color: #3a2316;
+    -fx-text-fill: #fffef3;
     -fx-background-radius: 8;
     -fx-padding: 10 14;
     -fx-cursor: hand;
+    -fx-font-weight: bold;
 }
 
 .primary-button:hover {
-    -fx-background-color: #1f2937;
+    -fx-background-color: #4a2d1a;
 }
 
 .secondary-button {
-    -fx-background-color: #e5e7eb;
-    -fx-text-fill: #111827;
+    -fx-background-color: #f5ede6;
+    -fx-text-fill: #3a2316;
     -fx-background-radius: 8;
+    -fx-border-color: #e8ddd5;
+    -fx-border-radius: 8;
     -fx-padding: 10 14;
     -fx-cursor: hand;
 }
 
 .secondary-button:hover {
-    -fx-background-color: #d1d5db;
+    -fx-background-color: #ead9ce;
 }
 
+/* ============================================================
+   FORM
+   ============================================================ */
 .form-label {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #374151;
+    -fx-text-fill: #4a3728;
 }
 
 .text-field, .combo-box {
@@ -34,31 +44,34 @@
     -fx-border-radius: 8;
 }
 
+/* ============================================================
+   TABLES
+   ============================================================ */
 .report-table {
     -fx-background-color: white;
-    -fx-border-color: #dcdfe4;
+    -fx-border-color: #e8ddd5;
     -fx-border-radius: 8;
 }
 
 .table-view {
     -fx-background-color: white;
-    -fx-table-cell-border-color: #eef2f7;
+    -fx-table-cell-border-color: #f5ede6;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #f9fafb;
+    -fx-background-color: #faf7f4;
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
-    -fx-border-color: #e5e7eb;
+    -fx-border-color: #e8ddd5;
     -fx-border-width: 0 0 1 0;
 }
 
 .table-view .column-header .label {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #374151;
+    -fx-text-fill: #765f52;
 }
 
 .tree-table-row-cell {
@@ -67,4 +80,127 @@
 
 .tree-table-view .tree-disclosure-node {
     -fx-padding: 0 4 0 4;
+}
+
+/* ============================================================
+   STAFF SETTINGS CARD
+   ============================================================ */
+.staff-card {
+    -fx-background-color: white;
+    -fx-border-color: #e8ddd5;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.staff-card-header {
+    -fx-background-color: #faf7f4;
+    -fx-border-color: #e8ddd5;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 12 16 12 16;
+}
+
+.staff-card-footer {
+    -fx-border-color: #e8ddd5;
+    -fx-border-width: 1 0 0 0;
+}
+
+.card-section-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a08878;
+    -fx-letter-spacing: 0.5px;
+}
+
+.staff-count-badge {
+    -fx-background-color: #f5ede6;
+    -fx-text-fill: #3a2316;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ============================================================
+   STAFF TABLE
+   ============================================================ */
+.staff-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: #faf7f4;
+}
+
+.staff-table .column-header-background {
+    -fx-background-color: #faf7f4;
+}
+
+.staff-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #e8ddd5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.staff-table .column-header .label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a08878;
+}
+
+.staff-table .table-row-cell:selected {
+    -fx-background-color: #f5ede6;
+}
+
+.staff-table .table-row-cell:selected .text {
+    -fx-fill: #3a2316;
+}
+
+/* ============================================================
+   ROLE LIST (staff settings sidebar)
+   ============================================================ */
+.role-list-view {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.role-list-view .list-cell {
+    -fx-background-color: white;
+    -fx-border-color: #f5ede6;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #4a3728;
+}
+
+.role-list-view .list-cell:selected {
+    -fx-background-color: #f5ede6;
+    -fx-text-fill: #3a2316;
+    -fx-font-weight: bold;
+}
+
+.role-list-view .list-cell:hover {
+    -fx-background-color: #faf7f4;
+}
+
+/* ============================================================
+   PERMISSION LIST (security settings)
+   ============================================================ */
+.perm-list-view {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.perm-list-view .list-cell {
+    -fx-background-color: white;
+    -fx-border-color: #faf7f4;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 12;
+}
+
+.perm-list-view .list-cell:selected {
+    -fx-background-color: #f5ede6;
+}
+
+.perm-list-view .list-cell:hover {
+    -fx-background-color: #faf7f4;
 }

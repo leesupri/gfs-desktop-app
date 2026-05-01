@@ -1,12 +1,15 @@
 package com.gfs.app.config;
-
+ 
+/**
+ * App database connection parameters.
+ * Credentials are loaded from db.properties — never hardcoded here.
+ */
 public class AppDatabaseConfig {
-
-    public static final String URL =
-            "jdbc:mysql://127.0.0.1:3306/gfs_desktop_app?useSSL=false&serverTimezone=Asia/Singapore";
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "leesupri491";
-
-    private AppDatabaseConfig() {
-    }
+ 
+    public static String getUrl()      { return DatabaseConfig.getAppUrl(); }
+    public static String getUsername() { return DatabaseConfig.getAppUsername(); }
+    public static String getPassword() { return DatabaseConfig.getAppPassword(); }
+ 
+    private AppDatabaseConfig() {}
 }
+ 

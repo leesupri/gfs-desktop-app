@@ -4,30 +4,66 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.gfs.app.ui.SecuritySettingsController" spacing="14" styleClass="content-pane">
-    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-    <children>
-        <Label text="Role &amp; Permission Management" styleClass="content-title"/>
-        <Label text="Define roles and assign permissions." styleClass="content-subtitle"/>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.SecuritySettingsController"
+      styleClass="content-pane"
+      spacing="16">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-        <HBox spacing="10">
-            <Button text="New Role" onAction="#handleNewRole" styleClass="primary-button"/>
-            <Button text="Edit Role" onAction="#handleEditRole" styleClass="secondary-button"/>
-            <Button text="Delete Role" onAction="#handleDeleteRole" styleClass="secondary-button"/>
-            <Region HBox.hgrow="ALWAYS"/>
-        </HBox>
+    <!-- ── Page header ─────────────────────────────────────────── -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="3" HBox.hgrow="ALWAYS">
+            <Label text="Role &amp; Permission Management" styleClass="content-title"/>
+            <Label text="Define roles and control what each role can access."
+                   styleClass="content-subtitle"/>
+        </VBox>
+        <Button text="+ New Role" onAction="#handleNewRole" styleClass="primary-button"/>
+    </HBox>
 
-        <TableView fx:id="rolesTable" prefHeight="200">
-            <columns>
-                <TableColumn fx:id="colRoleName" text="Role Name" prefWidth="200"/>
-            </columns>
-        </TableView>
+    <!-- ── Main split: roles list (left) + permissions panel (right) -->
+    <HBox spacing="14" VBox.vgrow="ALWAYS">
 
-        <Label text="Permissions for selected role:" styleClass="section-title"/>
-        <ListView fx:id="permissionsListView" VBox.vgrow="ALWAYS"/>
-        <HBox spacing="10">
-            <Button text="Save Permissions" onAction="#handleSavePermissions" styleClass="primary-button"/>
-        </HBox>
-    </children>
+        <!-- Roles card -->
+        <VBox styleClass="staff-card" prefWidth="260" minWidth="220" spacing="0">
+            <HBox styleClass="staff-card-header" alignment="CENTER_LEFT" spacing="10">
+                <Label text="ROLES" styleClass="card-section-label" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="roleCountLabel" text="0 roles" styleClass="staff-count-badge"/>
+            </HBox>
+
+            <!-- Role list — each row has name + inline Edit/Delete -->
+            <ListView fx:id="rolesTable" VBox.vgrow="ALWAYS" styleClass="role-list-view">
+                <placeholder>
+                    <Label text="No roles defined." styleClass="content-subtitle"
+                           style="-fx-padding: 20;"/>
+                </placeholder>
+            </ListView>
+        </VBox>
+
+        <!-- Permissions panel -->
+        <VBox styleClass="staff-card" HBox.hgrow="ALWAYS" spacing="0">
+            <HBox styleClass="staff-card-header" alignment="CENTER_LEFT">
+                <Label fx:id="permPanelTitle" text="Permissions"
+                       styleClass="card-section-label" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <ListView fx:id="permissionsListView" VBox.vgrow="ALWAYS"
+                      styleClass="perm-list-view">
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="6" style="-fx-padding: 32;">
+                        <Label text="Select a role to view" styleClass="content-subtitle"/>
+                        <Label text="and edit its permissions." styleClass="content-subtitle"/>
+                    </VBox>
+                </placeholder>
+            </ListView>
+
+            <VBox styleClass="staff-card-footer">
+                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                <Button text="Save Permission Changes"
+                        onAction="#handleSavePermissions"
+                        styleClass="primary-button" maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+
+    </HBox>
 </VBox>

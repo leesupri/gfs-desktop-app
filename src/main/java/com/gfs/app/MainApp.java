@@ -29,10 +29,13 @@ public class MainApp extends Application {
             );
 
             primaryStage.setTitle("GFS Desktop App - Login");
-            primaryStage.setMinWidth(480);
-            primaryStage.setMinHeight(320);
-            primaryStage.setScene(scene);
+            primaryStage.setMinWidth(650);
+            primaryStage.setMinHeight(500);
+            primaryStage.setWidth(900);
+            primaryStage.setHeight(600);
             primaryStage.centerOnScreen();
+            primaryStage.setScene(scene);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

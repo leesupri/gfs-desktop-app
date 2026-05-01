@@ -1,12 +1,15 @@
 package com.gfs.app.config;
-
+ 
+/**
+ * Reports database connection parameters.
+ * Credentials are loaded from db.properties — never hardcoded here.
+ */
 public class ReportsDatabaseConfig {
-
-    public static final String URL =
-            "jdbc:mysql://127.0.0.1:3306/db_gundaling?useSSL=false&serverTimezone=Asia/Singapore";
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "leesupri491";
-
-    private ReportsDatabaseConfig() {
-    }
+ 
+    public static String getUrl()      { return DatabaseConfig.getReportsUrl(); }
+    public static String getUsername() { return DatabaseConfig.getReportsUsername(); }
+    public static String getPassword() { return DatabaseConfig.getReportsPassword(); }
+ 
+    private ReportsDatabaseConfig() {}
 }
+ 

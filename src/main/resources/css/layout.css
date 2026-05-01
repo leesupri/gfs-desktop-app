@@ -1,99 +1,189 @@
-/* layout.css - Sidebar, top bar, content areas, cards */
+/* layout.css - Sidebar, top bar, content areas */
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
 .sidebar {
-    -fx-pref-width: 220px;
-    -fx-background-color: #ffffff;
-    -fx-border-color: #dcdfe4;
+    -fx-pref-width: 230px;
+    -fx-min-width: 230px;
+    -fx-background-color: #fffef3;
+    -fx-border-color: #e8ddd5;
     -fx-border-width: 0 1 0 0;
-    -fx-spacing: 8;
 }
 
-.app-title {
-    -fx-font-size: 18px;
+.sidebar-brand {
+    -fx-background-color: #3a2316;
+}
+
+.sidebar-logo {
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-text-fill: #1f2937;
+    -fx-text-fill: #fffef3;
+    -fx-letter-spacing: 2px;
+}
+
+.sidebar-subtitle {
+    -fx-font-size: 11px;
+    -fx-text-fill: #a08878;
+}
+
+.sidebar-separator {
+    -fx-background-color: #e8ddd5;
+    -fx-pref-height: 1px;
+    -fx-padding: 0;
 }
 
 .sidebar-heading {
-    -fx-padding: 10 0 4 0;
-    -fx-font-size: 12px;
+    -fx-font-size: 10px;
     -fx-font-weight: bold;
-    -fx-text-fill: #6b7280;
+    -fx-text-fill: #a08878;
+    -fx-letter-spacing: 1px;
+    -fx-padding: 0 4 6 4;
 }
 
+/* ============================================================
+   NAV BUTTONS
+   ============================================================ */
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #1f2937;
+    -fx-text-fill: #4a3728;
+    -fx-font-size: 13px;
     -fx-background-radius: 8;
-    -fx-padding: 10 12;
+    -fx-border-radius: 8;
+    -fx-padding: 9 12;
     -fx-alignment: CENTER_LEFT;
     -fx-cursor: hand;
 }
 
 .nav-button:hover {
-    -fx-background-color: #eef2f7;
+    -fx-background-color: #f0e8e0;
+    -fx-text-fill: #3a2316;
 }
 
-.nav-button-secondary {
+.nav-button-active {
+    -fx-background-color: #f5ede6;
+    -fx-text-fill: #3a2316;
+    -fx-font-weight: bold;
+}
+
+.nav-button-active:hover {
+    -fx-background-color: #ead9ce;
+}
+
+.nav-button-logout {
     -fx-background-color: transparent;
-    -fx-text-fill: #6b7280;
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 13px;
     -fx-background-radius: 8;
-    -fx-padding: 10 12;
+    -fx-border-radius: 8;
+    -fx-padding: 9 12;
     -fx-alignment: CENTER_LEFT;
     -fx-cursor: hand;
 }
 
-.nav-button-secondary:hover {
-    -fx-background-color: #f3f4f6;
+.nav-button-logout:hover {
+    -fx-background-color: #fef2f2;
+    -fx-text-fill: #991b1b;
 }
 
+/* ============================================================
+   TOP BAR
+   ============================================================ */
 .topbar {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #dcdfe4;
+    -fx-background-color: #fffef3;
+    -fx-border-color: #e8ddd5;
     -fx-border-width: 0 0 1 0;
-    -fx-alignment: CENTER_LEFT;
+    -fx-pref-height: 56px;
+    -fx-min-height: 56px;
 }
 
 .page-title {
-    -fx-font-size: 18px;
+    -fx-font-size: 17px;
     -fx-font-weight: bold;
-    -fx-text-fill: #111827;
+    -fx-text-fill: #3a2316;
+}
+
+.user-chip {
+    -fx-background-color: #f5ede6;
+    -fx-background-radius: 24;
+    -fx-border-color: #e8ddd5;
+    -fx-border-radius: 24;
+    -fx-border-width: 1;
+    -fx-padding: 5 14 5 8;
+}
+
+.user-avatar {
+    -fx-background-color: #3a2316;
+    -fx-background-radius: 50;
+    -fx-min-width: 28px;
+    -fx-min-height: 28px;
+    -fx-max-width: 28px;
+    -fx-max-height: 28px;
+}
+
+.user-avatar-label {
+    -fx-text-fill: #fffef3;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
 }
 
 .topbar-user {
     -fx-font-size: 13px;
-    -fx-text-fill: #4b5563;
+    -fx-text-fill: #4a3728;
 }
 
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
 .content-pane {
-    -fx-background-color: #f3f4f6;
+    -fx-background-color: #fffef3;
 }
 
 .content-title {
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: #111827;
+    -fx-text-fill: #3a2316;
 }
 
 .content-subtitle {
-    -fx-font-size: 14px;
-    -fx-text-fill: #6b7280;
+    -fx-font-size: 13px;
+    -fx-text-fill: #765f52;
 }
 
 .filter-card {
     -fx-background-color: white;
     -fx-background-radius: 10;
-    -fx-border-color: #dcdfe4;
+    -fx-border-color: #e8ddd5;
     -fx-border-radius: 10;
 }
 
 .section-title {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #111827;
+    -fx-text-fill: #3a2316;
 }
 
 .result-label {
     -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: #4b5563;
+    -fx-text-fill: #765f52;
+}
+
+.nav-button-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #765f52;
+    -fx-background-radius: 8;
+    -fx-padding: 9 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+}
+
+.nav-button-secondary:hover {
+    -fx-background-color: #f0e8e0;
+}
+
+.app-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3a2316;
 }

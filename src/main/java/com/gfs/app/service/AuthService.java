@@ -23,7 +23,7 @@ public class AuthService {
             return null;
         }
 
-        if (!PasswordUtil.verifyPassword(password, user.getPassword())) {
+        if (!PasswordUtil.verifyPassword(password, user.getPasswordHash())) {
             return null;
         }
 

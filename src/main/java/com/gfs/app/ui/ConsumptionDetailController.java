@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,13 +52,13 @@ public class ConsumptionDetailController {
     @FXML private ProgressIndicator progressIndicator;
 
     private final ConsumptionDetailService service = new ConsumptionDetailService();
-    private final DecimalFormat decimalFormat = new DecimalFormat("#,##0.000");
+    private final DecimalFormat decimalFormat = createEuropeanDecimalFormat();
     private Task<List<ConsumptionDetailRow>> currentLoadTask;
 
     @FXML
     public void initialize() {
         // Default date range: last 30 days
-        startDatePicker.setValue(LocalDate.now().minusDays(30));
+        startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(LocalDate.now());
 
         // Bind columns to ConsumptionTreeRow properties (all strings)
@@ -82,7 +83,7 @@ public class ConsumptionDetailController {
 
     @FXML
     private void handleRefresh() {
-        startDatePicker.setValue(LocalDate.now().minusDays(30));
+        startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(LocalDate.now());
         invoiceField.clear();
         itemField.clear();
@@ -122,6 +123,12 @@ private void handleToday() {
     // ------------------------------------------------------------------------
     // Data loading with background task and loading overlay
     // ------------------------------------------------------------------------
+    private static DecimalFormat createEuropeanDecimalFormat() {
+    DecimalFormat df = new DecimalFormat("#,###.00");
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return df;
+}
     private void loadData() {
     // Cancel any ongoing task
     if (currentLoadTask != null && currentLoadTask.isRunning()) {
@@ -355,12 +362,12 @@ private void handleToday() {
                         csvSafe(row.getDate()),
                         csvSafe(row.getCategory()),
                         csvSafe(row.getResultDescription()),
-                        formatNumberCSV(row.getResultQuantity()),
+                        formatNumberEuropean(row.getResultQuantity()),
                         csvSafe(row.getItem()),
-                        formatNumberCSV(row.getQuantity()),
+                        formatNumberEuropean(row.getQuantity()),
                         csvSafe(row.getUom()),
-                        formatNumberCSV(row.getUnitCost()),
-                        formatNumberCSV(row.getTotalCost()),
+                        formatNumberEuropean(row.getUnitCost()),
+                        formatNumberEuropean(row.getTotalCost()),
                         csvSafe(row.getWarehouse())
                 ));
             }
@@ -375,8 +382,12 @@ private void handleToday() {
 }
 
 // Dedicated CSV number formatter (no thousand separators)
-private String formatNumberCSV(double value) {
-    return String.format(Locale.US, "%.3f", value);
+private String formatNumberEuropean(double value) {
+    if (value == 0.0) return "\"0,00\"";
+    java.text.DecimalFormat df = new java.text.DecimalFormat("#,###.00");
+    java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(java.util.Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return "\"" + df.format(value) + "\"";
 }
 
     private String csvSafe(String value) {

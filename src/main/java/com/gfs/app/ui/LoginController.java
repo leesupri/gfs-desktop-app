@@ -4,73 +4,63 @@ import com.gfs.app.MainApp;
 import com.gfs.app.SessionManager;
 import com.gfs.app.db.AppDatabaseManager;
 import com.gfs.app.db.ReportsDatabaseManager;
+import com.gfs.app.model.ActivityLogAction;
+import com.gfs.app.service.ActivityLogService;
 import com.gfs.app.service.AuthResult;
 import com.gfs.app.service.AuthService;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 
 public class LoginController {
 
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private CheckBox showPasswordCheckbox;
-
-    @FXML
-    private Label messageLabel;
+    @FXML private TextField   usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Label       messageLabel;
+    @FXML private Button      showPasswordButton;
+    @FXML private CheckBox    rememberCheckbox;
+    @FXML private VBox        mascotPanel;
 
     private final AuthService authService = new AuthService();
+    private boolean     passwordVisible    = false;
+    private TextField   visiblePasswordField;
 
-    
     @FXML
-public void initialize() {
-    messageLabel.setText("");
-    // Password visibility toggle
-    showPasswordCheckbox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-        if (isSelected) {
-            // Show password as plain text
-            TextField visiblePassword = new TextField(passwordField.getText());
-            visiblePassword.setStyle(passwordField.getStyle());
-            visiblePassword.getStyleClass().addAll(passwordField.getStyleClass());
-            visiblePassword.setId("visiblePassword");
-            // Replace passwordField with visible field
-            VBox parent = (VBox) passwordField.getParent();
-            int idx = parent.getChildren().indexOf(passwordField);
-            parent.getChildren().set(idx, visiblePassword);
-            visiblePassword.textProperty().bindBidirectional(passwordField.textProperty());
+    public void initialize() {
+        messageLabel.setText("");
+    }
+
+    @FXML
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            String current = visiblePasswordField.getText();
+            passwordField.setText(current);
+            HBox parent = (HBox) showPasswordButton.getParent();
+            parent.getChildren().set(0, passwordField);
+            visiblePasswordField = null;
+            showPasswordButton.setText("👁");
+            passwordVisible = false;
         } else {
-            // Switch back to password field
-            TextField visible = (TextField) ((VBox) passwordField.getParent()).getChildren().get(
-                    ((VBox) passwordField.getParent()).getChildren().indexOf(passwordField) + 1
-            );
-            if (visible != null && "visiblePassword".equals(visible.getId())) {
-                VBox parent = (VBox) passwordField.getParent();
-                int idx = parent.getChildren().indexOf(visible);
-                parent.getChildren().set(idx, passwordField);
-                passwordField.textProperty().bindBidirectional(visible.textProperty());
-            }
+            visiblePasswordField = new TextField(passwordField.getText());
+            visiblePasswordField.setPromptText("Enter password");
+            visiblePasswordField.getStyleClass().addAll(passwordField.getStyleClass());
+            HBox parent = (HBox) showPasswordButton.getParent();
+            parent.getChildren().set(0, visiblePasswordField);
+            showPasswordButton.setText("🙈");
+            passwordVisible = true;
         }
-    });
-}
+    }
 
     @FXML
     private void handleLogin() {
         String username = usernameField.getText() == null ? "" : usernameField.getText().trim();
-        String password = passwordField.getText() == null ? "" : passwordField.getText();
+        String password = passwordVisible ? visiblePasswordField.getText() : passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("Please enter username and password.");
+            showMessage("Please enter username and password.", "red");
             return;
         }
 
@@ -78,33 +68,48 @@ public void initialize() {
 
         if (result != null) {
             SessionManager.login(result.getUser(), result.getPermissions());
+
+            // Log successful login using the now-populated session
+            ActivityLogService.log(
+                result.getUser().getId(),
+                result.getUser().getUsername(),
+                ActivityLogAction.LOGIN,
+                "Login successful"
+            );
+
             MainApp.showMainLayout();
         } else {
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("Invalid username, password, or inactive account.");
+            // Log failed attempt — user_id unknown so use 0
+            ActivityLogService.log(0L, username, ActivityLogAction.LOGIN_FAILED,
+                "Failed login attempt for username: " + username);
+            showMessage("Invalid username, password, or inactive account.", "red");
         }
     }
 
     @FXML
-private void handleTestConnection() {
-    try (
-        Connection appConn = AppDatabaseManager.getConnection();
-        Connection reportsConn = ReportsDatabaseManager.getConnection()
-    ) {
-        boolean appOk = appConn != null && !appConn.isClosed();
-        boolean reportsOk = reportsConn != null && !reportsConn.isClosed();
-
-        if (appOk && reportsOk) {
-            messageLabel.setStyle("-fx-text-fill: green;");
-            messageLabel.setText("App DB and Reports DB connection successful.");
-        } else {
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("One or more database connections failed.");
-        }
-    } catch (Exception e) {
-        messageLabel.setStyle("-fx-text-fill: red;");
-        messageLabel.setText("DB Error: " + e.getMessage());
-        e.printStackTrace();
+    private void handleForgotPassword() {
+        showMessage("Contact your system administrator to reset password.", "orange");
     }
-}
+
+    @FXML
+    private void handleTestConnection() {
+        try (Connection appConn     = AppDatabaseManager.getConnection();
+             Connection reportsConn = ReportsDatabaseManager.getConnection()) {
+            boolean appOk     = appConn     != null && !appConn.isClosed();
+            boolean reportsOk = reportsConn != null && !reportsConn.isClosed();
+            if (appOk && reportsOk) {
+                showMessage("App DB and Reports DB connection successful.", "green");
+            } else {
+                showMessage("One or more database connections failed.", "red");
+            }
+        } catch (Exception e) {
+            showMessage("DB Error: " + e.getMessage(), "red");
+            e.printStackTrace();
+        }
+    }
+
+    private void showMessage(String msg, String color) {
+        messageLabel.setStyle("-fx-text-fill: " + color + ";");
+        messageLabel.setText(msg);
+    }
 }

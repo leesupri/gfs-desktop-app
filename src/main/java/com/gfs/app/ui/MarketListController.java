@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -49,7 +50,7 @@ public class MarketListController {
     @FXML private ProgressIndicator progressIndicator;
 
     private final MarketListService service = new MarketListService();
-    private final DecimalFormat decimalFormat = new DecimalFormat("#,##0.000");
+    private final DecimalFormat decimalFormat = createEuropeanDecimalFormat();
     private Task<List<MarketListRow>> currentLoadTask;
     private Task<Void> currentExportTask;
 
@@ -184,6 +185,14 @@ public class MarketListController {
     // ------------------------------------------------------------------------
     // Background loading
     // ------------------------------------------------------------------------
+    private static DecimalFormat createEuropeanDecimalFormat() {
+    DecimalFormat df = new DecimalFormat("#,###.00");
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return df;
+}
+
+
     private void loadData() {
         if (currentLoadTask != null && currentLoadTask.isRunning()) {
             currentLoadTask.cancel();
@@ -264,8 +273,8 @@ public class MarketListController {
                             csvSafe(r.getInventoryUom()),
                             csvSafe(r.getPurchaseUom()),
                             csvSafe(r.getRecipeUom()),
-                            csvSafe(formatNumberCSV(r.getPurchasePrice())),
-                            csvSafe(formatNumberCSV(r.getAverageCost())),
+                            csvSafe(formatNumberEuropean(r.getPurchasePrice())),
+                            csvSafe(formatNumberEuropean(r.getAverageCost())),
                             csvSafe(r.isActive() ? "Active" : "Inactive"),
                             csvSafe(r.isSales() ? "Yes" : "No"),
                             csvSafe(r.isStocked() ? "Yes" : "No"),
@@ -282,9 +291,13 @@ public class MarketListController {
         }
     }
 
-    private String formatNumberCSV(double value) {
-        return String.format(Locale.US, "%.3f", value);
-    }
+    private String formatNumberEuropean(double value) {
+    if (value == 0.0) return "\"0,00\"";
+    java.text.DecimalFormat df = new java.text.DecimalFormat("#,###.00");
+    java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(java.util.Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return "\"" + df.format(value) + "\"";
+}
 
     private String csvSafe(String value) {
         if (value == null) return "";

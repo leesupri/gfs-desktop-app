@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -50,7 +51,7 @@ public class RecipeReportController {
     @FXML private ProgressIndicator progressIndicator;
 
     private final RecipeService service = new RecipeService();
-    private final DecimalFormat decimalFormat = new DecimalFormat("#,##0.000");
+    private final DecimalFormat decimalFormat = createEuropeanDecimalFormat();
     private Task<List<RecipeRow>> currentLoadTask;
 
     @FXML
@@ -144,6 +145,13 @@ public class RecipeReportController {
         };
         new Thread(exportTask).start();
     }
+
+    private static DecimalFormat createEuropeanDecimalFormat() {
+    DecimalFormat df = new DecimalFormat("#,###.00");
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return df;
+}
 
     private void loadData() {
         if (currentLoadTask != null && currentLoadTask.isRunning()) {
@@ -270,17 +278,17 @@ public class RecipeReportController {
                                 csvSafe(first.getSales()),
                                 csvSafe(first.getPurchased()),
                                 csvSafe(first.getStocked()),
-                                formatNumberCSV(first.getProduction()),
+                                formatNumberEuropean(first.getProduction()),
                                 csvSafe(first.getUom()),
                                 csvSafe(row.getItemName()),
-                                formatNumberCSV(row.getRecQty()),
+                                formatNumberEuropean(row.getRecQty()),
                                 csvSafe(row.getRecipeUom()),
-                                formatNumberCSV(row.getInvQty()),
+                                formatNumberEuropean(row.getInvQty()),
                                 csvSafe(row.getInvUom()),
-                                formatNumberCSV(row.getUnitCost()),
-                                formatNumberCSV(row.getTotalCost()),
-                                formatNumberCSV(recipeTotal),
-                                formatNumberCSV(costPerUnit)
+                                formatNumberEuropean(row.getUnitCost()),
+                                formatNumberEuropean(row.getTotalCost()),
+                                formatNumberEuropean(recipeTotal),
+                                formatNumberEuropean(costPerUnit)
                         ));
                     }
                 }
@@ -292,9 +300,13 @@ public class RecipeReportController {
         }
     }
 
-    private String formatNumberCSV(double value) {
-        return String.format(Locale.US, "%.3f", value);
-    }
+    private String formatNumberEuropean(double value) {
+    if (value == 0.0) return "\"0,00\"";
+    java.text.DecimalFormat df = new java.text.DecimalFormat("#,###.00");
+    java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(java.util.Locale.GERMANY);
+    df.setDecimalFormatSymbols(symbols);
+    return "\"" + df.format(value) + "\"";
+}
 
     private String csvSafe(String value) {
         if (value == null) return "";

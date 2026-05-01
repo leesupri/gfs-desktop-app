@@ -1,27 +1,188 @@
-/* login.css - Styles for the login screen */
+/* login.css - Gundaling brand colours */
+
+/* ============================================================
+   ROOT — dark brown gradient matches brand primary
+   -fx-base provides a solid colour so Modena can derive
+   tinted colours for child controls without a ClassCastException
+   ============================================================ */
 .login-root {
-    -fx-background-color: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #1c0e08, #3a2316, #5c3820);
+    -fx-base: #3a2316;
+    -fx-background-base: #3a2316;
 }
 
+.login-container {
+    -fx-alignment: center;
+    -fx-pref-width: 900;
+    -fx-min-width: 600;
+}
+
+/* ============================================================
+   LOGIN CARD
+   ============================================================ */
 .login-card {
-    -fx-background-color: white;
-    -fx-background-radius: 12;
-    -fx-border-color: #dcdfe4;
-    -fx-border-radius: 12;
+    -fx-background-color: #fffef3;
+    -fx-background-radius: 32;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 24, 0.1, 0, 6);
 }
 
-.login-title {
-    -fx-font-size: 22px;
+.login-form-panel {
+    -fx-background-radius: 0 32 32 0;
+}
+
+/* ============================================================
+   BADGE
+   ============================================================ */
+.login-badge {
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #111827;
+    -fx-text-fill: #3a2316;
+    -fx-background-color: #f5ede6;
+    -fx-background-radius: 50;
+    -fx-padding: 4 12;
+    -fx-max-width: 180;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.login-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3a2316;
 }
 
 .login-subtitle {
     -fx-font-size: 13px;
-    -fx-text-fill: #6b7280;
+    -fx-text-fill: #765f52;
+    -fx-wrap-text: true;
 }
 
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a3728;
+}
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+.login-field {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #e8ddd5;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-padding: 8 12;
+}
+
+.login-field:focused {
+    -fx-border-color: #3a2316;
+    -fx-border-width: 2;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.toggle-password-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #765f52;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+}
+
+.toggle-password-btn:hover {
+    -fx-text-fill: #3a2316;
+}
+
+.link-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #765f52;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.link-button:hover {
+    -fx-text-fill: #3a2316;
+    -fx-underline: true;
+}
+
+.login-button {
+    -fx-background-color: #3a2316;
+    -fx-text-fill: #fffef3;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 28;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(58,35,22,0.4), 10, 0, 0, 2);
+    -fx-max-width: Infinity;
+}
+
+.login-button:hover {
+    -fx-background-color: #4a2d1a;
+}
+
+/* ============================================================
+   CHECKBOX
+   ============================================================ */
+.checkbox {
+    -fx-font-size: 13px;
+    -fx-text-fill: #4a3728;
+}
+
+.checkbox .box {
+    -fx-background-radius: 6;
+}
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
 .login-message {
     -fx-font-size: 12px;
     -fx-text-fill: #dc2626;
+    -fx-wrap-text: true;
+}
+
+.secure-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: #765f52;
+    -fx-wrap-text: true;
+}
+
+/* ============================================================
+   MASCOT / LEFT PANEL
+   Removed: -fx-backdrop-filter (unsupported in JavaFX)
+   Removed: -fx-max-height: -Infinity (invalid in JavaFX CSS)
+   Gradients on .mascot-circle replaced with solid brand colour
+   ============================================================ */
+.mascot-panel-left {
+    -fx-background-color: #2a1a0e;
+    -fx-background-radius: 32 0 0 32;
+}
+
+.mascot-panel {
+    -fx-background-color: rgba(255,254,243,0.08);
+    -fx-background-radius: 32;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 2);
+}
+
+.mascot-circle {
+    -fx-background-color: #f5ede6;
+    -fx-background-radius: 100;
+    -fx-padding: 25;
+}
+
+.mascot-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fffef3;
+}
+
+.mascot-text {
+    -fx-font-size: 13px;
+    -fx-text-fill: #c4a898;
 }

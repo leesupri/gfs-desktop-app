@@ -4,33 +4,77 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.gfs.app.ui.StaffSettingsController" spacing="14" styleClass="content-pane">
-    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-    <children>
-        <Label text="Staff Management" styleClass="content-title"/>
-        <Label text="Create, edit, and delete staff accounts. Assign roles." styleClass="content-subtitle"/>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.StaffSettingsController"
+      styleClass="content-pane"
+      spacing="16">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-        <HBox spacing="10">
-            <Button text="New Staff" onAction="#handleNewStaff" styleClass="primary-button"/>
-            <Button text="Edit Selected" onAction="#handleEditStaff" styleClass="secondary-button"/>
-            <Button text="Delete Selected" onAction="#handleDeleteStaff" styleClass="secondary-button"/>
-            <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
-            <Region HBox.hgrow="ALWAYS"/>
-        </HBox>
+    <!-- ── Page header ─────────────────────────────────────────── -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="3" HBox.hgrow="ALWAYS">
+            <Label text="Staff Management" styleClass="content-title"/>
+            <Label text="Create, edit, and manage staff accounts and role assignments."
+                   styleClass="content-subtitle"/>
+        </VBox>
+        <Button text="Refresh"   onAction="#handleRefresh"  styleClass="secondary-button"/>
+        <Button text="+ New Staff" onAction="#handleNewStaff" styleClass="primary-button"/>
+    </HBox>
 
-        <TableView fx:id="staffTable" VBox.vgrow="ALWAYS">
-            <columns>
-                <TableColumn fx:id="colUsername" text="Username" prefWidth="120"/>
-                <TableColumn fx:id="colName" text="Full Name" prefWidth="180"/>
-                <TableColumn fx:id="colTitle" text="Title" prefWidth="150"/>
-                <TableColumn fx:id="colActive" text="Active" prefWidth="80"/>
-            </columns>
-        </TableView>
+    <!-- ── Main split: table (left) + role panel (right) ───────── -->
+    <HBox spacing="14" VBox.vgrow="ALWAYS">
 
-        <HBox spacing="10">
-            <Label text="Roles for selected user:" styleClass="form-label"/>
-            <ListView fx:id="rolesListView" prefHeight="100" VBox.vgrow="NEVER"/>
-        </HBox>
-    </children>
+        <!-- Staff table card -->
+        <VBox styleClass="staff-card" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+
+            <!-- Card header -->
+            <HBox styleClass="staff-card-header" alignment="CENTER_LEFT" spacing="10">
+                <Label text="STAFF ACCOUNTS" styleClass="card-section-label" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="staffCountLabel" text="0 members" styleClass="staff-count-badge"/>
+            </HBox>
+
+            <!-- Table -->
+            <TableView fx:id="staffTable" VBox.vgrow="ALWAYS" styleClass="staff-table">
+                <columns>
+                    <TableColumn fx:id="colName"     text="Name"     prefWidth="220" minWidth="160"/>
+                    <TableColumn fx:id="colUsername" text="Username" prefWidth="130" minWidth="100"/>
+                    <TableColumn fx:id="colTitle"    text="Title"    prefWidth="140" minWidth="100"/>
+                    <TableColumn fx:id="colActive"   text="Status"   prefWidth="90"  minWidth="80"/>
+                    <TableColumn fx:id="colActions"  text="Actions"  prefWidth="140" minWidth="120"/>
+                </columns>
+                <placeholder>
+                    <Label text="No staff accounts found." styleClass="content-subtitle"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- Role assignment panel -->
+        <VBox styleClass="staff-card" prefWidth="280" minWidth="240" spacing="0">
+
+            <!-- Panel header -->
+            <HBox styleClass="staff-card-header" alignment="CENTER_LEFT">
+                <Label fx:id="rolePanelTitle" text="Roles" styleClass="card-section-label"
+                       HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Role list -->
+            <ListView fx:id="rolesListView" VBox.vgrow="ALWAYS" styleClass="role-list-view">
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="6" style="-fx-padding: 24;">
+                        <Label text="Select a staff member" styleClass="content-subtitle"/>
+                        <Label text="to view and edit roles." styleClass="content-subtitle"/>
+                    </VBox>
+                </placeholder>
+            </ListView>
+
+            <!-- Save button pinned to bottom -->
+            <VBox styleClass="staff-card-footer">
+                <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                <Button text="Save Role Changes" onAction="#handleSaveRoles"
+                        styleClass="primary-button" maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+
+    </HBox>
 </VBox>

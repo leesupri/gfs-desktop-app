@@ -1,86 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gfs.app.ui.WarehouseConsumptionController"
-      spacing="14"
-      styleClass="content-pane">
+      spacing="14" styleClass="content-pane">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <children>
-        <VBox spacing="4">
-            <Label text="Sales Consumption Report per Warehouse" styleClass="content-title"/>
-            <Label text="Filter by date range and warehouse (optional). Grouped by warehouse." styleClass="content-subtitle"/>
-        </VBox>
+    <!-- Title -->
+    <VBox spacing="4">
+        <Label text="Warehouse Consumption Report" styleClass="content-title"/>
+        <Label text="Filter by date range, warehouse, or item. Grouped by warehouse."
+               styleClass="content-subtitle"/>
+    </VBox>
 
-        <VBox spacing="12" styleClass="filter-card">
-            <padding>
-                <Insets top="14" right="14" bottom="14" left="14"/>
-            </padding>
-            <children>
-                <Label text="Filters" styleClass="section-title"/>
+    <!-- Filters card -->
+    <VBox spacing="12" styleClass="filter-card">
+        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
 
-                <HBox spacing="12">
-                    <children>
-                        <VBox spacing="6">
-                            <Label text="Start Date" styleClass="form-label"/>
-                            <DatePicker fx:id="startDatePicker" prefWidth="140"/>
-                        </VBox>
-                        <VBox spacing="6">
-                            <Label text="End Date" styleClass="form-label"/>
-                            <DatePicker fx:id="endDatePicker" prefWidth="140"/>
-                        </VBox>
-                        <VBox spacing="6" HBox.hgrow="ALWAYS">
-                            <Label text="Warehouse (optional)" styleClass="form-label"/>
-                            <TextField fx:id="warehouseField" promptText="Leave empty for all" prefWidth="200"/>
-                        </VBox>
-                    </children>
-                </HBox>
+        <Label text="Filters" styleClass="section-title"/>
 
-                <HBox spacing="10">
-                    <children>
-                        <Button text="Search" onAction="#handleSearch" styleClass="primary-button"/>
-                        <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
-                        <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
-                        <Region HBox.hgrow="ALWAYS"/>
-                        <Label fx:id="resultLabel" text="0 row(s)" styleClass="result-label"/>
-                        <Label fx:id="totalLabel" text="Total Cost: 0.000" styleClass="result-label"/>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
+        <!-- Row 1: dates + warehouse + item -->
+        <HBox spacing="12">
+            <VBox spacing="6">
+                <Label text="Start Date" styleClass="form-label"/>
+                <DatePicker fx:id="startDatePicker" prefWidth="140"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="End Date" styleClass="form-label"/>
+                <DatePicker fx:id="endDatePicker" prefWidth="140"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Warehouse" styleClass="form-label"/>
+                <TextField fx:id="warehouseField" promptText="Leave empty for all"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Item" styleClass="form-label"/>
+                <TextField fx:id="itemField" promptText="Leave empty for all"/>
+            </VBox>
+        </HBox>
 
-        <StackPane VBox.vgrow="ALWAYS">
-            <children>
-                <TreeTableView fx:id="treeTableView" showRoot="false" styleClass="report-table">
-                    <columns>
-                        <TreeTableColumn fx:id="warehouseColumn" text="Warehouse" prefWidth="180"/>
-                        <TreeTableColumn fx:id="itemColumn" text="Item" prefWidth="280"/>
-                        <TreeTableColumn fx:id="uomColumn" text="UOM" prefWidth="100"/>
-                        <TreeTableColumn fx:id="quantityColumn" text="Quantity" prefWidth="120"/>
-                        <TreeTableColumn fx:id="totalCostColumn" text="Total Cost" prefWidth="150"/>
-                    </columns>
-                </TreeTableView>
+        <!-- Row 2: actions + summary labels -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Search"     onAction="#handleSearch"  styleClass="primary-button"/>
+            <Button text="Refresh"    onAction="#handleRefresh" styleClass="secondary-button"/>
+            <Button text="Export CSV" onAction="#handleExport"  styleClass="secondary-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="resultLabel" text="0 item(s)"       styleClass="result-label"/>
+            <Label fx:id="totalLabel"  text="Total Cost: --"   styleClass="result-label"/>
+        </HBox>
+    </VBox>
 
-                <StackPane fx:id="loadingOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
-                    <ProgressIndicator fx:id="progressIndicator" />
-                </StackPane>
-            </children>
+    <!-- TreeTableView with loading overlay -->
+    <StackPane VBox.vgrow="ALWAYS">
+        <TreeTableView fx:id="treeTableView" showRoot="false" styleClass="report-table">
+            <columns>
+                <TreeTableColumn fx:id="warehouseColumn" text="Warehouse" prefWidth="180"/>
+                <TreeTableColumn fx:id="itemColumn"      text="Item"      prefWidth="280"/>
+                <TreeTableColumn fx:id="uomColumn"       text="UOM"       prefWidth="100"/>
+                <TreeTableColumn fx:id="quantityColumn"  text="Quantity"  prefWidth="120"/>
+                <TreeTableColumn fx:id="totalCostColumn" text="Total Cost" prefWidth="150"/>
+            </columns>
+        </TreeTableView>
+
+        <StackPane fx:id="loadingOverlay" visible="false"
+                   style="-fx-background-color: rgba(0,0,0,0.35);">
+            <ProgressIndicator fx:id="progressIndicator"/>
         </StackPane>
-    </children>
+    </StackPane>
 </VBox>

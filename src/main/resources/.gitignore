@@ -1,0 +1,14 @@
+# Maven
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Database credentials — NEVER commit this file
+src/main/resources/db.properties
+
+# OS
+.DS_Store
+Thumbs.db

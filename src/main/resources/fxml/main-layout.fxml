@@ -6,9 +6,10 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -16,55 +17,93 @@
             fx:id="rootPane"
             stylesheets="@../css/app.css">
 
-    <!-- Left Sidebar -->
+    <!-- ================================================================== -->
+    <!-- LEFT SIDEBAR                                                        -->
+    <!-- ================================================================== -->
     <left>
-        <VBox styleClass="sidebar" spacing="8">
+        <VBox styleClass="sidebar">
             <padding>
-                <Insets top="20" right="12" bottom="20" left="12"/>
+                <Insets top="0" right="0" bottom="0" left="0"/>
             </padding>
 
-            <children>
-                <!-- App logo / title -->
-                <Label text="GFS" styleClass="sidebar-logo"/>
-                <Label text="Desktop App" styleClass="sidebar-subtitle"/>
-                <Separator styleClass="sidebar-separator"/>
+            <!-- Brand block -->
+            <VBox styleClass="sidebar-brand">
+                <padding>
+                    <Insets top="20" right="16" bottom="16" left="16"/>
+                </padding>
+                <Label text="GUNDALING" styleClass="sidebar-logo"/>
+                <Label text="Farmstead · Desktop" styleClass="sidebar-subtitle"/>
+            </VBox>
 
+            <Separator styleClass="sidebar-separator"/>
+
+            <!-- Main nav -->
+            <VBox styleClass="sidebar-section" spacing="2">
+                <padding>
+                    <Insets top="12" right="8" bottom="4" left="8"/>
+                </padding>
                 <Label text="MAIN" styleClass="sidebar-heading"/>
+                <Button fx:id="homeButton"                 text="🏠  Home"                 onAction="#showHome"                 styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="salesButton"                text="💳  Sales"                onAction="#showSales"                styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="itemSalesReportButton"      text="📊  Item Sales Report"    onAction="#showItemSalesReport"      styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="marketListButton"           text="🛒  Market List"          onAction="#showMarketList"           styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="recipeButton"               text="🍽  Recipe Report"        onAction="#showRecipeReport"         styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="consumptionDetailButton"    text="🔍  Consumption Detail"   onAction="#showConsumptionDetail"    styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="warehouseConsumptionButton" text="🏭  Warehouse Consumption" onAction="#showWarehouseConsumption" styleClass="nav-button" maxWidth="Infinity"/>
+                
+            </VBox>
 
-                <Button fx:id="homeButton" text="Home" onAction="#showHome" styleClass="nav-button"/>
-                <Button fx:id="salesButton" text="Sales" onAction="#showSales" styleClass="nav-button"/>
-                <Button fx:id="marketListButton" text="Market List" onAction="#showMarketList" styleClass="nav-button"/>
-                <Button fx:id="recipeButton" text="Recipe Report" onAction="#showRecipeReport" styleClass="nav-button"/>
-                <Button fx:id="consumptionDetailButton" text="Consumption Detail" onAction="#showConsumptionDetail" styleClass="nav-button"/>
-                <Button fx:id="warehouseConsumptionButton" text="Warehouse Consumption" onAction="#showWarehouseConsumption" styleClass="nav-button"/>
-                <Button fx:id="activityLogButton" text="Activity Log" onAction="#showActivityLog" styleClass="nav-button"/>
+            <Separator styleClass="sidebar-separator"/>
 
-                <Separator styleClass="sidebar-separator"/>
-
+            <!-- Admin nav -->
+            <VBox styleClass="sidebar-section" spacing="2">
+                <padding>
+                    <Insets top="12" right="8" bottom="4" left="8"/>
+                </padding>
                 <Label text="ADMIN" styleClass="sidebar-heading"/>
+                <Button fx:id="staffButton"    text="👥  Staff Settings"    onAction="#showStaffSettings"    styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="securityButton" text="🔒  Security Settings" onAction="#showSecuritySettings" styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="activityLogButton"          text="📋  Activity Log"         onAction="#showActivityLog"          styleClass="nav-button" maxWidth="Infinity"/>
+            </VBox>
 
-                <Button fx:id="staffButton" text="Staff Settings" onAction="#showStaffSettings" styleClass="nav-button"/>
-<Button fx:id="securityButton" text="Security Settings" onAction="#showSecuritySettings" styleClass="nav-button"/>
+            <!-- Spacer pushes logout to bottom -->
+            <Region VBox.vgrow="ALWAYS"/>
 
-                <Region VBox.vgrow="ALWAYS"/>
+            <Separator styleClass="sidebar-separator"/>
 
-                <Separator styleClass="sidebar-separator"/>
-                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button-logout"/>
-            </children>
+            <!-- Logout -->
+            <VBox styleClass="sidebar-section">
+                <padding>
+                    <Insets top="8" right="8" bottom="16" left="8"/>
+                </padding>
+                <Button text="⬅  Logout" onAction="#handleLogout"
+                        styleClass="nav-button-logout" maxWidth="Infinity"/>
+            </VBox>
         </VBox>
     </left>
 
-    <!-- Top Bar -->
+    <!-- ================================================================== -->
+    <!-- TOP BAR                                                             -->
+    <!-- ================================================================== -->
     <top>
-        <HBox styleClass="topbar">
+        <HBox styleClass="topbar" alignment="CENTER_LEFT">
             <padding>
-                <Insets top="12" right="16" bottom="12" left="16"/>
+                <Insets top="0" right="20" bottom="0" left="24"/>
             </padding>
-            <children>
-                <Label fx:id="pageTitleLabel" text="Home" styleClass="page-title"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="currentUserLabel" text="User: -" styleClass="topbar-user"/>
-            </children>
+
+            <!-- Page title -->
+            <Label fx:id="pageTitleLabel" text="Home" styleClass="page-title"/>
+
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- User chip -->
+            <HBox styleClass="user-chip" alignment="CENTER_LEFT" spacing="10">
+                <StackPane styleClass="user-avatar">
+                    <Label fx:id="userInitialsLabel" text="?" styleClass="user-avatar-label"/>
+                </StackPane>
+                <Label fx:id="currentUserLabel" text="-" styleClass="topbar-user"/>
+            </HBox>
         </HBox>
     </top>
 
