@@ -53,6 +53,7 @@
                 <Button fx:id="productionButton"           text="🏭  Production"           onAction="#showProduction"           styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="consumptionDetailButton"    text="🔍  Consumption Detail"   onAction="#showConsumptionDetail"    styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="purchaseReportButton" text="🛍  Purchase Reports" onAction="#showPurchaseReport" styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="noSalesButton" text="🚫  No Sales" onAction="#showNoSales" styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="warehouseConsumptionButton" text="📦  Warehouse Consumption" onAction="#showWarehouseConsumption" styleClass="nav-button" maxWidth="Infinity"/>
             </VBox>
 

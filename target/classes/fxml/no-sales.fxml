@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.NoSalesController"
+      styleClass="content-pane" spacing="14">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="3" HBox.hgrow="ALWAYS">
+            <Label text="No Sales Reports" styleClass="content-title"/>
+            <Label text="Internal sales not tied to a formal invoice (invoice_id IS NULL, closed = 1)."
+                   styleClass="content-subtitle"/>
+        </VBox>
+        <Button text="Export CSV" onAction="#handleExport"  styleClass="secondary-button"/>
+        <Button text="Refresh"    onAction="#handleRefresh" styleClass="secondary-button"/>
+        <Button text="Search"     onAction="#handleSearch"  styleClass="primary-button"/>
+    </HBox>
+
+    <!-- Shared filters -->
+    <VBox styleClass="filter-card" spacing="10">
+        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+        <Label text="Filters" styleClass="section-title"/>
+
+        <!-- Row 1: dates + item filters -->
+        <HBox spacing="10">
+            <VBox spacing="5">
+                <Label text="Start Date" styleClass="form-label"/>
+                <DatePicker fx:id="startDatePicker" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="End Date" styleClass="form-label"/>
+                <DatePicker fx:id="endDatePicker" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="5" prefWidth="150">
+                <Label text="Department" styleClass="form-label"/>
+                <ComboBox fx:id="departmentFilter" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" prefWidth="150">
+                <Label text="Category" styleClass="form-label"/>
+                <ComboBox fx:id="categoryFilter" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Item Description" styleClass="form-label"/>
+                <TextField fx:id="descriptionField" promptText="Item / Tab 0 only"/>
+            </VBox>
+        </HBox>
+
+        <!-- Row 2: receipt-specific filters -->
+        <HBox spacing="10">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Table" styleClass="form-label"/>
+                <TextField fx:id="tableField" promptText="Table name / Tab 1 only"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Staff" styleClass="form-label"/>
+                <TextField fx:id="staffField" promptText="Staff name / Tab 1 only"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <VBox spacing="4" alignment="BOTTOM_RIGHT">
+                <Label fx:id="resultLabel"    text="0 item(s)"       styleClass="result-label"/>
+                <Label fx:id="grandTotalLabel" text="Grand Total: --"
+                       style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!-- Tabs -->
+    <StackPane VBox.vgrow="ALWAYS">
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+
+            <!-- ── Tab 0: Item Summary ────────────────────────── -->
+            <Tab text="Item Summary">
+                <TreeTableView fx:id="itemTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="iColDept"        text="Department"  prefWidth="130" minWidth="100"/>
+                        <TreeTableColumn fx:id="iColCategory"    text="Category"    prefWidth="130" minWidth="100"/>
+                        <TreeTableColumn fx:id="iColDescription" text="Description" prefWidth="200" minWidth="140"/>
+                        <TreeTableColumn fx:id="iColQty"         text="Qty"         prefWidth="70"  minWidth="55"/>
+                        <TreeTableColumn fx:id="iColNetSales"    text="Net Sales"   prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="iColDisc"        text="Discount"    prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="iColCost"        text="Cost"        prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="iColProfit"      text="Profit"      prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="iColProfitPct"   text="Profit %"    prefWidth="70"  minWidth="55"/>
+                        <TreeTableColumn fx:id="iColService"     text="Service"     prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="iColTax"         text="Tax"         prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="iColTotal"       text="Total"       prefWidth="100" minWidth="80"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No internal sales found for the selected period."
+                               styleClass="content-subtitle"/>
+                    </placeholder>
+                </TreeTableView>
+            </Tab>
+
+            <!-- ── Tab 1: Receipt Detail ──────────────────────── -->
+            <Tab text="Receipt Detail">
+                <TreeTableView fx:id="receiptTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="rColId"          text="Sale ID"     prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="rColCreated"     text="Opened"      prefWidth="130" minWidth="110"/>
+                        <TreeTableColumn fx:id="rColClosed"      text="Closed"      prefWidth="130" minWidth="110"/>
+                        <TreeTableColumn fx:id="rColTable"       text="Table"       prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="rColType"        text="Type"        prefWidth="70"  minWidth="55"/>
+                        <TreeTableColumn fx:id="rColGuest"       text="Guests"      prefWidth="55"  minWidth="45"/>
+                        <TreeTableColumn fx:id="rColStaff"       text="Staff"       prefWidth="110" minWidth="80"/>
+                        <TreeTableColumn fx:id="rColDescription" text="Item"        prefWidth="180" minWidth="130"/>
+                        <TreeTableColumn fx:id="rColQty"         text="Qty"         prefWidth="55"  minWidth="45"/>
+                        <TreeTableColumn fx:id="rColPrice"       text="Price"       prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="rColTotal"       text="Total"       prefWidth="100" minWidth="80"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No receipts found for the selected period."
+                               styleClass="content-subtitle"/>
+                    </placeholder>
+                </TreeTableView>
+            </Tab>
+
+        </TabPane>
+
+        <!-- Loading overlay -->
+        <StackPane fx:id="loadingOverlay" visible="false"
+                   style="-fx-background-color: rgba(0,0,0,0.35);">
+            <ProgressIndicator fx:id="progressIndicator"/>
+        </StackPane>
+    </StackPane>
+</VBox>

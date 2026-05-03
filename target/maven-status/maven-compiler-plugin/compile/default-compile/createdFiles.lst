@@ -1,3 +1,4 @@
+com\gfs\app\ui\NoSalesController$3.class
 com\gfs\app\model\PurchaseSummaryRow.class
 com\gfs\app\repository\OrderBoardRepository.class
 com\gfs\app\ui\ReceiptSummaryController$2.class
@@ -8,6 +9,7 @@ com\gfs\app\ui\StaffSettingsController$4.class
 com\gfs\app\ui\OrderBoardController$2.class
 com\gfs\app\ui\ConsumptionDetailController$1.class
 com\gfs\app\repository\PurchaseRepository.class
+com\gfs\app\ui\NoSalesController$6.class
 com\gfs\app\model\ReceiptSummaryRow.class
 com\gfs\app\repository\MarketListRepository.class
 com\gfs\app\ui\OrderBoardController$5.class
@@ -20,6 +22,7 @@ com\gfs\app\db\AppDatabaseManager.class
 com\gfs\app\repository\RoleRepository.class
 com\gfs\app\repository\ReceiptRepository.class
 com\gfs\app\ui\StaffSettingsController$1.class
+com\gfs\app\ui\NoSalesController$9.class
 com\gfs\app\ui\ProductionDetailController$1.class
 com\gfs\app\ui\ItemSalesReportController$3.class
 com\gfs\app\model\ProductionDetailRow.class
@@ -36,6 +39,7 @@ com\gfs\app\ui\SalesController.class
 com\gfs\app\ui\PurchaseReportController$4.class
 com\gfs\app\ui\ReceiptSummaryController.class
 com\gfs\app\ui\StaffSettingsController.class
+com\gfs\app\ui\NoSalesController$8.class
 com\gfs\app\ui\ActivityLogController$1.class
 com\gfs\app\service\WarehouseConsumptionService.class
 com\gfs\app\model\ItemSalesTreeRow.class
@@ -46,7 +50,9 @@ com\gfs\app\service\MarketListService.class
 com\gfs\app\ui\ConsumptionDetailController.class
 com\gfs\app\ui\MarketListController$2.class
 com\gfs\app\model\ItemSalesRow.class
+com\gfs\app\repository\NoSalesRepository.class
 com\gfs\app\ui\SecuritySettingsController$2.class
+com\gfs\app\ui\NoSalesController$1.class
 com\gfs\app\repository\StaffRepository.class
 com\gfs\app\ui\PurchaseReportController$5.class
 com\gfs\app\ui\OrderBoardController.class
@@ -54,6 +60,7 @@ com\gfs\app\ui\WelcomeController.class
 com\gfs\app\model\RecipeRow.class
 com\gfs\app\ui\ItemSalesReportController$1.class
 com\gfs\app\ui\ActivityLogController$2.class
+com\gfs\app\ui\NoSalesController$7.class
 com\gfs\app\ui\ItemSalesReportController.class
 com\gfs\app\model\ActivityLogAction.class
 com\gfs\app\service\ReceiptService.class
@@ -66,12 +73,14 @@ com\gfs\app\service\AuthResult.class
 com\gfs\app\ui\ProductionSummaryController$1.class
 com\gfs\app\repository\ProductionRepository$ProductionHeaderRow.class
 com\gfs\app\ui\PurchaseReportController$DropdownData.class
+com\gfs\app\service\NoSalesService.class
 com\gfs\app\SessionManager.class
 com\gfs\app\repository\ConsumptionDetailRepository.class
 com\gfs\app\ui\ProductionSummaryController$SummaryAndHeaders.class
 com\gfs\app\service\ItemSalesService.class
 com\gfs\app\ui\ProductionDetailController$2.class
 com\gfs\app\ui\SecuritySettingsController.class
+com\gfs\app\model\NoSalesReceiptRow.class
 com\gfs\app\ui\PurchaseReportController$6.class
 com\gfs\app\ui\PurchaseReportController$9.class
 com\gfs\app\service\OrderBoardService.class
@@ -88,6 +97,7 @@ com\gfs\app\repository\AuthRepository.class
 com\gfs\app\ui\ProductionSummaryController$DropdownData.class
 com\gfs\app\ui\OrderBoardController$1.class
 com\gfs\app\ui\ReceiptSummaryController$3.class
+com\gfs\app\ui\NoSalesController$2.class
 com\gfs\app\ui\ProductionSummaryController.class
 com\gfs\app\MainApp.class
 com\gfs\app\service\ActivityLogService.class
@@ -97,6 +107,7 @@ com\gfs\app\ui\ReceiptDetailController$1.class
 com\gfs\app\ui\SecuritySettingsController$1.class
 com\gfs\app\ui\StaffSettingsController$2.class
 com\gfs\app\ui\RecipeReportController$1.class
+com\gfs\app\ui\NoSalesController$5.class
 com\gfs\app\model\OrderBillSummary.class
 com\gfs\app\ui\RecipeReportController.class
 com\gfs\app\ui\StaffSettingsController$5.class
@@ -120,12 +131,16 @@ com\gfs\app\ui\ProductionSummaryController$5.class
 com\gfs\app\ui\PurchaseReportController$10.class
 com\gfs\app\model\PurchaseDetailRow.class
 com\gfs\app\util\PasswordUtil.class
+com\gfs\app\ui\NoSalesController$4.class
 com\gfs\app\ui\ReceiptSummaryController$1.class
 com\gfs\app\ui\ProductionDetailController.class
 com\gfs\app\ui\MarketListController.class
 com\gfs\app\ui\PurchaseReportController$8.class
+com\gfs\app\ui\NoSalesController$DropdownData.class
 com\gfs\app\model\ConsumptionTreeRow.class
+com\gfs\app\model\NoSalesItemRow.class
 com\gfs\app\model\Permission.class
+com\gfs\app\ui\NoSalesController.class
 com\gfs\app\ui\ProductionDetailController$3.class
 com\gfs\app\ui\WarehouseConsumptionController.class
 com\gfs\app\ui\MainLayoutController.class

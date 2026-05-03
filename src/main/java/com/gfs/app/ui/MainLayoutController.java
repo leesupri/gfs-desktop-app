@@ -34,6 +34,7 @@ public class MainLayoutController {
     @FXML private Button consumptionDetailButton;
     @FXML private Button purchaseReportButton;
     @FXML private Button warehouseConsumptionButton;
+    @FXML private Button noSalesButton;
 
     // Admin
     @FXML private Button activityLogButton;
@@ -79,6 +80,7 @@ public class MainLayoutController {
         setButtonAccess(consumptionDetailButton,    "consumption_detail.view");
         setButtonAccess(purchaseReportButton,       "purchase.view");
         setButtonAccess(warehouseConsumptionButton, "warehouse_consumption.view");
+        setButtonAccess(noSalesButton, "no_sales.view");
         setButtonAccess(activityLogButton,          "activity_log.view");
         setButtonAccess(staffButton,                "staff.manage");
         setButtonAccess(securityButton,             "security.manage");
@@ -120,6 +122,7 @@ public class MainLayoutController {
     @FXML private void showProduction()          { loadPage("/fxml/production-summary.fxml",   "Production Summary");          setActiveButton(productionButton); }
     @FXML private void showConsumptionDetail()   { loadPage("/fxml/consumption-detail.fxml",   "Consumption Detail Invoice");  setActiveButton(consumptionDetailButton); }
     @FXML private void showPurchaseReport() {loadPage("/fxml/purchase-report.fxml", "Purchase Reports");setActiveButton(purchaseReportButton);}
+    @FXML private void showNoSales() { loadPage("/fxml/no-sales.fxml", "No Sales Reports"); setActiveButton(noSalesButton); }
     @FXML private void showWarehouseConsumption(){ loadPage("/fxml/warehouse-consumption.fxml","Warehouse Consumption");       setActiveButton(warehouseConsumptionButton); }
 
     // Navigation — Admin

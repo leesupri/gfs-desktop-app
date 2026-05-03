@@ -6,8 +6,10 @@ F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\ConsumptionDetailRow.
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\OrderLineRow.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\StaffSettingsController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\PurchaseOrderSummaryRow.java
+F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\NoSalesService.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\OrderBoardController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\ActivityLogController.java
+F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\NoSalesController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\ItemSalesRow.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\ProductionDetailController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\ActivityLogAction.java
@@ -25,6 +27,7 @@ F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\db\ReportsDatabaseManager.j
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\repository\PermissionRepository.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\ConsumptionDetailService.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\config\AppDatabaseConfig.java
+F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\repository\NoSalesRepository.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\HomeController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\ReceiptService.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\ConsumptionTreeRow.java
@@ -39,6 +42,7 @@ F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\ReceiptSummaryRow.jav
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\ReceiptDetailController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\repository\ReceiptRepository.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\ActivityLogService.java
+F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\NoSalesReceiptRow.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\SalesController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\config\DatabaseConfig.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\AuthService.java
@@ -63,6 +67,7 @@ F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\repository\ConsumptionDetai
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\repository\PurchaseRepository.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\service\RecipeService.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\RecipeRow.java
+F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\NoSalesItemRow.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\RecipeReportController.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\model\PurchaseDetailRow.java
 F:\aab\app\gfs-desktop-app\src\main\java\com\gfs\app\ui\SecuritySettingsController.java
