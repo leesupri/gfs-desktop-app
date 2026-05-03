@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.PurchaseReportController"
+      styleClass="content-pane" spacing="14">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="3" HBox.hgrow="ALWAYS">
+            <Label text="Purchase Reports" styleClass="content-title"/>
+            <Label text="Summary, detail by category/partner, and purchase order summary."
+                   styleClass="content-subtitle"/>
+        </VBox>
+        <Button text="Export CSV" onAction="#handleExport"  styleClass="secondary-button"/>
+        <Button text="Refresh"    onAction="#handleRefresh" styleClass="secondary-button"/>
+        <Button text="Search"     onAction="#handleSearch"  styleClass="primary-button"/>
+    </HBox>
+
+    <!-- Shared filters -->
+    <VBox styleClass="filter-card" spacing="10">
+        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+        <Label text="Filters" styleClass="section-title"/>
+        <HBox spacing="10">
+            <VBox spacing="5">
+                <Label text="Start Date" styleClass="form-label"/>
+                <DatePicker fx:id="startDatePicker" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="End Date" styleClass="form-label"/>
+                <DatePicker fx:id="endDatePicker" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="5" prefWidth="150">
+                <Label text="Category" styleClass="form-label"/>
+                <ComboBox fx:id="categoryFilter" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" prefWidth="150">
+                <Label text="Partner" styleClass="form-label"/>
+                <ComboBox fx:id="partnerFilter" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" prefWidth="150">
+                <Label text="Warehouse" styleClass="form-label"/>
+                <ComboBox fx:id="warehouseFilter" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Item" styleClass="form-label"/>
+                <TextField fx:id="itemField" promptText="Search item name"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="24" alignment="CENTER_RIGHT">
+            <Label fx:id="resultLabel"    text="0 item(s)"      styleClass="result-label"/>
+            <Label fx:id="grandTotalLabel" text="Grand Total: --"
+                   style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+        </HBox>
+    </VBox>
+
+    <!-- Tab pane -->
+    <StackPane VBox.vgrow="ALWAYS">
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+
+            <!-- ── Tab 0: Purchase Summary ─────────────────── -->
+            <Tab text="Purchase Summary">
+                <TreeTableView fx:id="summaryTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="sumColCategory"  text="Category"    prefWidth="150" minWidth="100"/>
+                        <TreeTableColumn fx:id="sumColName"      text="Item Name"   prefWidth="220" minWidth="150"/>
+                        <TreeTableColumn fx:id="sumColCode"      text="Code"        prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="sumColQty"       text="Quantity"    prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="sumColUom"       text="UOM"         prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="sumColTotalCost" text="Total Cost"  prefWidth="120" minWidth="90"/>
+                    </columns>
+                    <placeholder><Label text="No data." styleClass="content-subtitle"/></placeholder>
+                </TreeTableView>
+            </Tab>
+
+            <!-- ── Tab 1: Detail by Category ──────────────── -->
+            <Tab text="Detail by Category">
+                <TreeTableView fx:id="detailCatTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="dcColGroup"      text="Category / Item"  prefWidth="180" minWidth="140"/>
+                        <TreeTableColumn fx:id="dcColDate"       text="Date"             prefWidth="120" minWidth="100"/>
+                        <TreeTableColumn fx:id="dcColInvoice"    text="Invoice"          prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dcColPurchaseQty" text="Pur. Qty"        prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dcColPurchaseUom" text="Pur. UOM"        prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dcColQty"        text="Qty"              prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dcColUom"        text="UOM"              prefWidth="70"  minWidth="50"/>
+                        <TreeTableColumn fx:id="dcColUnitCost"   text="Unit Cost"        prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="dcColTotal"      text="Total"            prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="dcColPartner"    text="Partner"          prefWidth="120" minWidth="90"/>
+                        <TreeTableColumn fx:id="dcColWarehouse"  text="Warehouse"        prefWidth="100" minWidth="80"/>
+                    </columns>
+                    <placeholder><Label text="No data." styleClass="content-subtitle"/></placeholder>
+                </TreeTableView>
+            </Tab>
+
+            <!-- ── Tab 2: Detail by Partner ───────────────── -->
+            <Tab text="Detail by Partner">
+                <TreeTableView fx:id="detailParTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="dpColGroup"      text="Partner / Item"   prefWidth="160" minWidth="120"/>
+                        <TreeTableColumn fx:id="dpColDate"       text="Date"             prefWidth="120" minWidth="100"/>
+                        <TreeTableColumn fx:id="dpColInvoice"    text="Invoice"          prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dpColCategory"   text="Category"         prefWidth="110" minWidth="80"/>
+                        <TreeTableColumn fx:id="dpColItem"       text="Item Name"        prefWidth="160" minWidth="120"/>
+                        <TreeTableColumn fx:id="dpColPurchaseQty" text="Pur. Qty"        prefWidth="75"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dpColPurchaseUom" text="Pur. UOM"        prefWidth="75"  minWidth="60"/>
+                        <TreeTableColumn fx:id="dpColQty"        text="Qty"              prefWidth="70"  minWidth="55"/>
+                        <TreeTableColumn fx:id="dpColUom"        text="UOM"              prefWidth="65"  minWidth="50"/>
+                        <TreeTableColumn fx:id="dpColUnitCost"   text="Unit Cost"        prefWidth="85"  minWidth="70"/>
+                        <TreeTableColumn fx:id="dpColTotal"      text="Total"            prefWidth="90"  minWidth="70"/>
+                        <TreeTableColumn fx:id="dpColWarehouse"  text="Warehouse"        prefWidth="100" minWidth="80"/>
+                    </columns>
+                    <placeholder><Label text="No data." styleClass="content-subtitle"/></placeholder>
+                </TreeTableView>
+            </Tab>
+
+            <!-- ── Tab 3: Purchase Order Summary ──────────── -->
+            <Tab text="Order Summary">
+                <TreeTableView fx:id="orderTree" showRoot="false" styleClass="staff-table">
+                    <columns>
+                        <TreeTableColumn fx:id="ordColCategory"  text="Category"      prefWidth="140" minWidth="100"/>
+                        <TreeTableColumn fx:id="ordColItemName"  text="Item Name"     prefWidth="220" minWidth="150"/>
+                        <TreeTableColumn fx:id="ordColItemCode"  text="Item Code"     prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="ordColQty"       text="Qty Ordered"   prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="ordColReceived"  text="Qty Received"  prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="ordColUom"       text="UOM"           prefWidth="80"  minWidth="60"/>
+                        <TreeTableColumn fx:id="ordColUnitPrice" text="Unit Price"    prefWidth="100" minWidth="80"/>
+                        <TreeTableColumn fx:id="ordColTotal"     text="Total"         prefWidth="110" minWidth="90"/>
+                    </columns>
+                    <placeholder><Label text="No data." styleClass="content-subtitle"/></placeholder>
+                </TreeTableView>
+            </Tab>
+
+        </TabPane>
+
+        <!-- Loading overlay -->
+        <StackPane fx:id="loadingOverlay" visible="false"
+                   style="-fx-background-color: rgba(0,0,0,0.35);">
+            <ProgressIndicator fx:id="progressIndicator"/>
+        </StackPane>
+    </StackPane>
+</VBox>

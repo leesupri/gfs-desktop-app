@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.ProductionDetailController"
+      styleClass="content-pane" spacing="14">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <!-- Title bar -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label fx:id="labelProductionId" text="Production #—"
+               styleClass="content-title" HBox.hgrow="ALWAYS"/>
+        <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
+        <Button text="Close"      onAction="#handleClose"  styleClass="secondary-button"/>
+    </HBox>
+
+    <!-- Production header card -->
+    <VBox styleClass="staff-card">
+        <HBox styleClass="staff-card-header">
+            <Label text="PRODUCTION HEADER" styleClass="card-section-label"/>
+        </HBox>
+        <GridPane hgap="20" vgap="8">
+            <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
+
+            <Label text="Date:"      styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="labelDate" text="—" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Warehouse:"      styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <Label fx:id="labelWarehouse" text="—" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+            <Label text="Notes:"      styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="labelNotes" text="—" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                   GridPane.columnSpan="3" wrapText="true"/>
+        </GridPane>
+    </VBox>
+
+    <!-- Product / ingredient tree -->
+    <VBox styleClass="staff-card" VBox.vgrow="ALWAYS">
+        <HBox styleClass="staff-card-header" alignment="CENTER_LEFT" spacing="10">
+            <Label text="PRODUCTS &amp; INGREDIENTS" styleClass="card-section-label" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="resultLabel" text="—" styleClass="staff-count-badge"/>
+        </HBox>
+
+        <StackPane VBox.vgrow="ALWAYS">
+            <TreeTableView fx:id="treeTable" showRoot="false"
+                           styleClass="staff-table" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TreeTableColumn fx:id="colItemName"   text="Name"        prefWidth="220" minWidth="160"/>
+                    <TreeTableColumn fx:id="colCategory"   text="Category"    prefWidth="130" minWidth="100"/>
+                    <TreeTableColumn fx:id="colQty"        text="Qty"         prefWidth="80"  minWidth="60"/>
+                    <TreeTableColumn fx:id="colUom"        text="UOM"         prefWidth="80"  minWidth="60"/>
+                    <TreeTableColumn fx:id="colDescription" text="Description" prefWidth="260" minWidth="150"/>
+                </columns>
+                <placeholder>
+                    <Label text="No production lines." styleClass="content-subtitle"/>
+                </placeholder>
+            </TreeTableView>
+
+            <StackPane fx:id="loadingOverlay" visible="false"
+                       style="-fx-background-color: rgba(0,0,0,0.35);">
+                <ProgressIndicator/>
+            </StackPane>
+        </StackPane>
+    </VBox>
+</VBox>

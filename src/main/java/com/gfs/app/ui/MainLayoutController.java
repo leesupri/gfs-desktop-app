@@ -20,15 +20,22 @@ public class MainLayoutController {
     @FXML private Label      currentUserLabel;
     @FXML private Label      userInitialsLabel;
 
+    // Main
     @FXML private Button homeButton;
     @FXML private Button salesButton;
+
+    // Reports
+    @FXML private Button itemSalesReportButton;
     @FXML private Button receiptSummaryButton;
     @FXML private Button orderBoardButton;
-    @FXML private Button itemSalesReportButton;
     @FXML private Button marketListButton;
     @FXML private Button recipeButton;
+    @FXML private Button productionButton;
     @FXML private Button consumptionDetailButton;
+    @FXML private Button purchaseReportButton;
     @FXML private Button warehouseConsumptionButton;
+
+    // Admin
     @FXML private Button activityLogButton;
     @FXML private Button staffButton;
     @FXML private Button securityButton;
@@ -63,12 +70,14 @@ public class MainLayoutController {
     private void applyPermissions() {
         setButtonAccess(homeButton,                 "home.view");
         setButtonAccess(salesButton,                "sales.view");
-        setButtonAccess(receiptSummaryButton,       "sales.view");
-        setButtonAccess(orderBoardButton,           "sales.view");
         setButtonAccess(itemSalesReportButton,      "item_sales_report.view");
+        setButtonAccess(receiptSummaryButton,       "receipt_summary.view");
+        setButtonAccess(orderBoardButton,           "order_board.view");
         setButtonAccess(marketListButton,           "market_list.view");
         setButtonAccess(recipeButton,               "recipe.view");
+        setButtonAccess(productionButton,           "production.view");
         setButtonAccess(consumptionDetailButton,    "consumption_detail.view");
+        setButtonAccess(purchaseReportButton,       "purchase.view");
         setButtonAccess(warehouseConsumptionButton, "warehouse_consumption.view");
         setButtonAccess(activityLogButton,          "activity_log.view");
         setButtonAccess(staffButton,                "staff.manage");
@@ -85,26 +94,38 @@ public class MainLayoutController {
         if      (SessionManager.hasPermission("home.view"))                  showHome();
         else if (SessionManager.hasPermission("sales.view"))                 showSales();
         else if (SessionManager.hasPermission("item_sales_report.view"))     showItemSalesReport();
+        else if (SessionManager.hasPermission("receipt_summary.view"))       showReceiptSummary();
+        else if (SessionManager.hasPermission("order_board.view"))           showOrderBoard();
         else if (SessionManager.hasPermission("consumption_detail.view"))    showConsumptionDetail();
         else if (SessionManager.hasPermission("warehouse_consumption.view")) showWarehouseConsumption();
         else if (SessionManager.hasPermission("market_list.view"))           showMarketList();
         else if (SessionManager.hasPermission("recipe.view"))                showRecipeReport();
+        else if (SessionManager.hasPermission("production.view"))            showProduction();
+        else if (SessionManager.hasPermission("purchase.view"))            showPurchaseReport();
+        
         else if (SessionManager.hasPermission("activity_log.view"))          showActivityLog();
         else    pageTitleLabel.setText("No Access");
     }
 
-    @FXML private void showHome()                 { loadPage("/fxml/home.fxml",                  "Home");                       setActiveButton(homeButton); }
-    @FXML private void showSales()                { loadPage("/fxml/sales.fxml",                 "Sales");                      setActiveButton(salesButton); }
-    @FXML private void showReceiptSummary() {loadPage("/fxml/receipt-summary.fxml", "Receipt Summary"); setActiveButton(receiptSummaryButton);}
-    @FXML private void showItemSalesReport()      { loadPage("/fxml/item-sales-report.fxml",     "Item Sales Report");          setActiveButton(itemSalesReportButton); }
-    @FXML private void showOrderBoard() {loadPage("/fxml/order-board.fxml", "Order Board"); setActiveButton(orderBoardButton);}
-    @FXML private void showRecipeReport()         { loadPage("/fxml/recipe-report.fxml",         "Recipe Report");              setActiveButton(recipeButton); }
-    @FXML private void showConsumptionDetail()    { loadPage("/fxml/consumption-detail.fxml",    "Consumption Detail Invoice"); setActiveButton(consumptionDetailButton); }
-    @FXML private void showWarehouseConsumption() { loadPage("/fxml/warehouse-consumption.fxml", "Warehouse Consumption");      setActiveButton(warehouseConsumptionButton); }
-    @FXML private void showMarketList()           { loadPage("/fxml/market-list.fxml",           "Market List");                setActiveButton(marketListButton); }
-    @FXML private void showActivityLog()          { loadPage("/fxml/activity-log.fxml",          "Activity Log");               setActiveButton(activityLogButton); }
-    @FXML private void showStaffSettings()        { loadPage("/fxml/staff-settings.fxml",        "Staff Settings");             setActiveButton(staffButton); }
-    @FXML private void showSecuritySettings()     { loadPage("/fxml/security-settings.fxml",     "Security Settings");          setActiveButton(securityButton); }
+    // Navigation — Main
+    @FXML private void showHome()  { loadPage("/fxml/home.fxml",  "Home");  setActiveButton(homeButton); }
+    @FXML private void showSales() { loadPage("/fxml/sales.fxml", "Sales"); setActiveButton(salesButton); }
+
+    // Navigation — Reports
+    @FXML private void showItemSalesReport()     { loadPage("/fxml/item-sales-report.fxml",    "Item Sales Report");           setActiveButton(itemSalesReportButton); }
+    @FXML private void showReceiptSummary()      { loadPage("/fxml/receipt-summary.fxml",      "Receipt Summary");             setActiveButton(receiptSummaryButton); }
+    @FXML private void showOrderBoard()          { loadPage("/fxml/order-board.fxml",          "Order Board");                 setActiveButton(orderBoardButton); }
+    @FXML private void showMarketList()          { loadPage("/fxml/market-list.fxml",          "Market List");                 setActiveButton(marketListButton); }
+    @FXML private void showRecipeReport()        { loadPage("/fxml/recipe-report.fxml",        "Recipe Report");               setActiveButton(recipeButton); }
+    @FXML private void showProduction()          { loadPage("/fxml/production-summary.fxml",   "Production Summary");          setActiveButton(productionButton); }
+    @FXML private void showConsumptionDetail()   { loadPage("/fxml/consumption-detail.fxml",   "Consumption Detail Invoice");  setActiveButton(consumptionDetailButton); }
+    @FXML private void showPurchaseReport() {loadPage("/fxml/purchase-report.fxml", "Purchase Reports");setActiveButton(purchaseReportButton);}
+    @FXML private void showWarehouseConsumption(){ loadPage("/fxml/warehouse-consumption.fxml","Warehouse Consumption");       setActiveButton(warehouseConsumptionButton); }
+
+    // Navigation — Admin
+    @FXML private void showActivityLog()     { loadPage("/fxml/activity-log.fxml",      "Activity Log");      setActiveButton(activityLogButton); }
+    @FXML private void showStaffSettings()   { loadPage("/fxml/staff-settings.fxml",    "Staff Settings");    setActiveButton(staffButton); }
+    @FXML private void showSecuritySettings(){ loadPage("/fxml/security-settings.fxml", "Security Settings"); setActiveButton(securityButton); }
 
     @FXML
     private void handleLogout() {
@@ -126,7 +147,8 @@ public class MainLayoutController {
     }
 
     private void setActiveButton(Button button) {
-        if (currentActiveButton != null) currentActiveButton.getStyleClass().remove("nav-button-active");
+        if (currentActiveButton != null)
+            currentActiveButton.getStyleClass().remove("nav-button-active");
         currentActiveButton = button;
         if (button != null && !button.getStyleClass().contains("nav-button-active"))
             button.getStyleClass().add("nav-button-active");
