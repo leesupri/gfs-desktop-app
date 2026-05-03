@@ -45,6 +45,8 @@
                 <Label text="MAIN" styleClass="sidebar-heading"/>
                 <Button fx:id="homeButton"                 text="🏠  Home"                 onAction="#showHome"                 styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="salesButton"                text="💳  Sales"                onAction="#showSales"                styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="receiptSummaryButton" text="🧾  Receipt Summary"             onAction="#showReceiptSummary" styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="orderBoardButton" text="📋  Order Board"                     onAction="#showOrderBoard" styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="itemSalesReportButton"      text="📊  Item Sales Report"    onAction="#showItemSalesReport"      styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="marketListButton"           text="🛒  Market List"          onAction="#showMarketList"           styleClass="nav-button" maxWidth="Infinity"/>
                 <Button fx:id="recipeButton"               text="🍽  Recipe Report"        onAction="#showRecipeReport"         styleClass="nav-button" maxWidth="Infinity"/>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.ReceiptDetailController"
+      styleClass="content-pane" spacing="14">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <!-- Title bar row -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label fx:id="labelInvoiceId" text="Invoice #—"
+               styleClass="content-title" HBox.hgrow="ALWAYS"/>
+        <Button text="Export CSV" onAction="#handleExport" styleClass="secondary-button"/>
+        <Button text="Close"      onAction="#handleClose"  styleClass="secondary-button"/>
+    </HBox>
+
+    <!-- Receipt header info card -->
+    <VBox styleClass="staff-card">
+
+        <HBox styleClass="staff-card-header">
+            <Label text="RECEIPT HEADER" styleClass="card-section-label"/>
+        </HBox>
+
+        <GridPane hgap="16" vgap="8">
+            <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
+
+            <!-- Row 0 -->
+            <Label text="Opened:"     styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="labelDate"  text="—" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Closed:"      styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <Label fx:id="labelClosed" text="—" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+            <Label text="Table:"       styleClass="form-label" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+            <Label fx:id="labelTable"  text="—" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+
+            <!-- Row 1 -->
+            <Label text="Type:"       styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="labelType"  text="—" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Guests:"      styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            <Label fx:id="labelGuest"  text="—" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+            <Label text="Staff:"       styleClass="form-label" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+            <Label fx:id="labelStaff"  text="—" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+
+            <!-- Row 2 -->
+            <Label text="Member:"      styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="labelMember" text="—" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Notes:"       styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            <Label fx:id="labelNotes"  text="—" GridPane.columnIndex="3" GridPane.rowIndex="2"
+                   GridPane.columnSpan="3"/>
+        </GridPane>
+
+        <!-- Totals row -->
+        <HBox styleClass="staff-card-footer" spacing="24" alignment="CENTER_RIGHT">
+            <padding><Insets top="10" right="16" bottom="10" left="16"/></padding>
+
+            <VBox alignment="CENTER" spacing="2">
+                <Label text="SUBTOTAL" styleClass="card-section-label"/>
+                <Label fx:id="labelSubtotal" text="0,00" style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+            <VBox alignment="CENTER" spacing="2">
+                <Label text="DISCOUNT" styleClass="card-section-label"/>
+                <Label fx:id="labelDiscount" text="0,00" style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+            <VBox alignment="CENTER" spacing="2">
+                <Label text="SERVICE" styleClass="card-section-label"/>
+                <Label fx:id="labelService"  text="0,00" style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+            <VBox alignment="CENTER" spacing="2">
+                <Label text="TAX" styleClass="card-section-label"/>
+                <Label fx:id="labelTax"      text="0,00" style="-fx-font-size:13px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+            <VBox alignment="CENTER" spacing="2">
+                <Label text="TOTAL" styleClass="card-section-label"/>
+                <Label fx:id="labelTotal"    text="0,00" style="-fx-font-size:16px; -fx-font-weight:bold; -fx-text-fill:#3a2316;"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!-- Line items -->
+    <VBox styleClass="staff-card" VBox.vgrow="ALWAYS">
+        <HBox styleClass="staff-card-header" alignment="CENTER_LEFT" spacing="10">
+            <Label text="LINE ITEMS" styleClass="card-section-label" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="resultLabel" text="—" styleClass="staff-count-badge"/>
+        </HBox>
+
+        <StackPane VBox.vgrow="ALWAYS">
+            <TableView fx:id="lineTable" styleClass="staff-table" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colIdx"         text="#"           prefWidth="40"  minWidth="36"/>
+                    <TableColumn fx:id="colDescription"  text="Item"        prefWidth="340" minWidth="200"/>
+                    <TableColumn fx:id="colQty"          text="Qty"         prefWidth="70"  minWidth="50"/>
+                    <TableColumn fx:id="colPrice"        text="Price"       prefWidth="120" minWidth="90"/>
+                </columns>
+                <placeholder>
+                    <Label text="No line items." styleClass="content-subtitle"/>
+                </placeholder>
+            </TableView>
+
+            <StackPane fx:id="loadingOverlay" visible="false"
+                       style="-fx-background-color: rgba(0,0,0,0.35);">
+                <ProgressIndicator/>
+            </StackPane>
+        </StackPane>
+    </VBox>
+</VBox>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gfs.app.ui.ReceiptSummaryController"
+      styleClass="content-pane" spacing="16">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="3" HBox.hgrow="ALWAYS">
+            <Label text="Receipt Summary" styleClass="content-title"/>
+            <Label text="All receipts for the selected period. Double-click a row to view the full receipt detail."
+                   styleClass="content-subtitle"/>
+        </VBox>
+        <Button text="Export CSV" onAction="#handleExport"  styleClass="secondary-button"/>
+        <Button text="Refresh"    onAction="#handleRefresh" styleClass="secondary-button"/>
+        <Button text="Search"     onAction="#handleSearch"  styleClass="primary-button"/>
+    </HBox>
+
+    <!-- Filters -->
+    <VBox styleClass="filter-card" spacing="12">
+        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+        <Label text="Filters" styleClass="section-title"/>
+        <HBox spacing="12">
+            <VBox spacing="6">
+                <Label text="Start Date" styleClass="form-label"/>
+                <DatePicker fx:id="startDatePicker" prefWidth="140"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="End Date" styleClass="form-label"/>
+                <DatePicker fx:id="endDatePicker" prefWidth="140"/>
+            </VBox>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Invoice ID" styleClass="form-label"/>
+                <TextField fx:id="invoiceField" promptText="Search by invoice number"/>
+            </VBox>
+            <VBox spacing="6" prefWidth="160">
+                <Label text="Type" styleClass="form-label"/>
+                <ComboBox fx:id="typeFilter" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+            <Label fx:id="resultLabel" text="0 receipt(s)" styleClass="result-label"/>
+            <Label fx:id="totalLabel"  text="Grand Total: --" styleClass="result-label"/>
+        </HBox>
+    </VBox>
+
+    <!-- Table -->
+    <StackPane VBox.vgrow="ALWAYS">
+        <TableView fx:id="tableView" styleClass="staff-table">
+            <columns>
+                <TableColumn fx:id="colInvoice"  text="Invoice ID"     prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colDate"     text="Date"           prefWidth="140" minWidth="120"/>
+                <TableColumn fx:id="colType"     text="Type"           prefWidth="80"  minWidth="60"/>
+                <TableColumn fx:id="colPax"      text="Pax"            prefWidth="50"  minWidth="40"/>
+                <TableColumn fx:id="colSubtotal" text="Subtotal"       prefWidth="110" minWidth="90"/>
+                <TableColumn fx:id="colDiscount" text="Discount"       prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colService"  text="Service Charge" prefWidth="120" minWidth="90"/>
+                <TableColumn fx:id="colTax"      text="Tax"            prefWidth="100" minWidth="80"/>
+                <TableColumn fx:id="colRounding" text="Rounding"       prefWidth="90"  minWidth="70"/>
+                <TableColumn fx:id="colTotal"    text="Total"          prefWidth="110" minWidth="90"/>
+            </columns>
+            <placeholder>
+                <Label text="No receipts found. Adjust the date range and search." styleClass="content-subtitle"/>
+            </placeholder>
+        </TableView>
+
+        <StackPane fx:id="loadingOverlay" visible="false"
+                   style="-fx-background-color: rgba(0,0,0,0.35);">
+            <ProgressIndicator fx:id="progressIndicator"/>
+        </StackPane>
+    </StackPane>
+</VBox>

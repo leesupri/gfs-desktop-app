@@ -22,6 +22,8 @@ public class MainLayoutController {
 
     @FXML private Button homeButton;
     @FXML private Button salesButton;
+    @FXML private Button receiptSummaryButton;
+    @FXML private Button orderBoardButton;
     @FXML private Button itemSalesReportButton;
     @FXML private Button marketListButton;
     @FXML private Button recipeButton;
@@ -61,6 +63,8 @@ public class MainLayoutController {
     private void applyPermissions() {
         setButtonAccess(homeButton,                 "home.view");
         setButtonAccess(salesButton,                "sales.view");
+        setButtonAccess(receiptSummaryButton,       "sales.view");
+        setButtonAccess(orderBoardButton,           "sales.view");
         setButtonAccess(itemSalesReportButton,      "item_sales_report.view");
         setButtonAccess(marketListButton,           "market_list.view");
         setButtonAccess(recipeButton,               "recipe.view");
@@ -91,7 +95,9 @@ public class MainLayoutController {
 
     @FXML private void showHome()                 { loadPage("/fxml/home.fxml",                  "Home");                       setActiveButton(homeButton); }
     @FXML private void showSales()                { loadPage("/fxml/sales.fxml",                 "Sales");                      setActiveButton(salesButton); }
+    @FXML private void showReceiptSummary() {loadPage("/fxml/receipt-summary.fxml", "Receipt Summary"); setActiveButton(receiptSummaryButton);}
     @FXML private void showItemSalesReport()      { loadPage("/fxml/item-sales-report.fxml",     "Item Sales Report");          setActiveButton(itemSalesReportButton); }
+    @FXML private void showOrderBoard() {loadPage("/fxml/order-board.fxml", "Order Board"); setActiveButton(orderBoardButton);}
     @FXML private void showRecipeReport()         { loadPage("/fxml/recipe-report.fxml",         "Recipe Report");              setActiveButton(recipeButton); }
     @FXML private void showConsumptionDetail()    { loadPage("/fxml/consumption-detail.fxml",    "Consumption Detail Invoice"); setActiveButton(consumptionDetailButton); }
     @FXML private void showWarehouseConsumption() { loadPage("/fxml/warehouse-consumption.fxml", "Warehouse Consumption");      setActiveButton(warehouseConsumptionButton); }
